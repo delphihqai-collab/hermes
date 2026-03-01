@@ -2,7 +2,7 @@
 
 ## Machines
 
-- PC1 → ATLAS (Development Director) — accessible via Discord #atlas-chat
+- PC1 → ATLAS (Development Director) — accessible via Discord #atlas-chat — Bot ID: 1477646928840888331
 - PC2 → This machine (HERMES)
 - PC3 → NEXUS (Chief of Staff) — accessible via Discord #nexus-chat
 
