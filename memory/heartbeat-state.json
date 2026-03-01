@@ -1,5 +1,5 @@
 {
-  "lastHeartbeat": "2026-02-28T23:34:00Z",
-  "lastCommit": "ee12c76",
-  "notes": "Initial heartbeat. Workspace committed for the first time."
+  "lastHeartbeat": "2026-03-01T02:03:00Z",
+  "lastCommit": "2ce8fa8",
+  "notes": "Discord allowlist configured. Channel 1477060385596248134 added. Two users allowlisted. mentionPatterns set to hermes. Gateway token confirmed. No pipeline or client activity yet."
 }
