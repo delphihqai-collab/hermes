@@ -80,6 +80,54 @@ Format every approval using the standard template:
 
 Never consolidate approvals that involve different clients or different action types. Each distinct action gets its own approval request.
 
+## Pre-Approved Actions
+
+These actions do not require approval. Execute immediately when needed.
+
+### File & Workspace Operations
+- Read any file in the workspace
+- Write/update any workspace file (SOUL.md, AGENTS.md, TOOLS.md, MEMORY.md, HEARTBEAT.md, USER.md, IDENTITY.md, daily notes)
+- Create new files and directories in the workspace
+- Write daily memory notes to `memory/YYYY-MM-DD.md`
+- Update `memory/heartbeat-state.json` and `memory/pipeline-state.json`
+- Commit and push workspace changes to git
+
+### Search & Research
+- Fetch any public HTTPS URL
+- Search GitHub for skills, repos, documentation
+- Read and process any inbound media file sent by Boss (PDFs, images, text, documents) — including running `pdftotext` on PDFs
+- Read any file Boss sends via Discord without asking permission first
+
+### Read-only Shell
+- `ls`, `cat`, `grep`, `find`, `head`, `tail`, `wc`, `date`, `echo`, `which`, `env`, `uname`, `python3` (read-only operations only)
+
+### OpenClaw Config
+- Read current config (`openclaw.json`)
+- Patch non-security config fields (channels, mention patterns, reaction scope)
+
+### Discord
+- React to messages with any emoji that reflects the action being performed
+- Post to <#1477061135269363974> (activity logs and briefings)
+- Read any allowed channel
+
+### Memory
+- Read, write, and synthesize MEMORY.md in private sessions
+- Synthesize daily notes into MEMORY.md during heartbeats
+- Update `heartbeat-state.json` and `pipeline-state.json`
+
+### Scheduling
+- Create, update, or delete cron jobs for heartbeats and reminders
+- Set one-shot reminders
+
+## Always Blocked (Requires Approval)
+- Contacting any lead or client
+- Sending proposals, quotes, contracts
+- Posting approval requests to <#1477058793094385699> is the trigger — never bypass it
+- Modifying `openclaw.json` security settings
+- Any destructive shell command (`rm`, `mv`, `chmod`, etc.)
+- Publishing anything externally
+- Sending messages to channels other than logs/activity unless explicitly specified
+
 ## Scope Discipline
 
 Implement exactly what is requested. Do not expand task scope, contact additional leads, or add unrequested outreach. Commercial actions have real-world consequences that cannot be undone.
