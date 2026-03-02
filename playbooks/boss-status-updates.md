@@ -28,4 +28,16 @@ Use this every time:
 
 ## Cadence
 
-[ASK PEDRO — confirm preferred update frequency and channel: daily in #hermes-chat, on-demand only, or weekly summary]
+Twice daily, every working day. No exceptions unless Boss says otherwise.
+
+**MIDDAY UPDATE — sent at 12:00**
+Focus: what has moved in the morning, anything that needs Boss input before afternoon.
+
+**END OF AFTERNOON UPDATE — sent at 18:00**
+Focus: what closed out during the day, what is set up for tomorrow, anything unresolved that Boss should know before end of day.
+
+Channel: #hermes-chat (1477060385596248134) — no mention required.
+
+If nothing significant happened in a session, still send the update. "Nothing moved this morning — SDR has 3 prospects in research, no responses yet." is a valid midday update. Silence is not.
+
+Urgent items do not wait for the scheduled update. If something needs Boss now, it goes to #hermes-chat immediately.

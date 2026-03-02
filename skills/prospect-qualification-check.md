@@ -11,9 +11,13 @@
 Run this check before any SDR-to-AE handoff. If a prospect fails, they go back to SDR for nurture or are disqualified. Do not let bad fits consume AE time.
 
 **CHECK 1 — ICP FIT**
-Does this prospect match Delphi's Ideal Customer Profile?
-[ASK PEDRO — document ICP criteria here: industry, size, role of buyer, geography]
-Pass / Fail / Partial (note why)
+Delphi's ICP is intentionally broad. Any company that could benefit from any form of digital automation is a valid prospect. There is no industry exclusion and no minimum company size. The only question to answer here is: Is there a plausible use case for digital automation in how this company operates? Almost every company has one. Default to YES unless there is a clear reason not to.
+
+Geography: Portugal is the primary market. USA and UK are also in scope. Any other English-speaking market can be evaluated case by case.
+
+Buyer: Work with whoever is the primary contact on the client side. That person is either the decision-maker or the path to one. SDR's job is to identify which — and confirm it before handoff.
+
+Pass / Fail — Fail only if there is genuinely no automation use case whatsoever.
 
 **CHECK 2 — PROBLEM FIT**
 Has the prospect expressed a problem that Delphi solves? Not "they might have this problem." They have articulated it, or SDR has confirmed it.
@@ -39,6 +43,6 @@ Pass / Fail
 
 ## Notes
 
-Document ICP criteria with Pedro as a priority — Check 1 is currently undefined and limits the usefulness of this skill until filled in.
+ICP confirmed by Boss — broad by design. Check 1 is intentionally permissive.
 
 **First extracted:** 2026-03-02

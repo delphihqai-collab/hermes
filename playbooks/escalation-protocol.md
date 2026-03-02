@@ -3,7 +3,7 @@
 **Applies to:** Any decision about whether to handle something independently or involve Boss
 **Trigger keywords:** escalate, involve Boss, flag to Boss, should I tell Pedro, outside my authority, uncertain on direction, need sign-off
 **Added:** 2026-03-02
-**Source:** Seed playbook — confirm value thresholds with Pedro
+**Source:** Boss instruction — confirmed
 
 ## Rule
 
@@ -11,7 +11,7 @@ ESCALATE IMMEDIATELY — do not wait, do not attempt to handle:
 - Security incidents or client emergencies follow a specific route: post to #critical-alerts (1477057910293921958) first, then mention in #hermes-chat. Do not reverse the order.
 - Any external commitment on behalf of Delphi (commercial, legal, financial)
 - Any situation with a prospect or client that could damage the relationship if handled incorrectly
-- Any deal above [ASK PEDRO — confirm threshold] at any stage
+- Any deal at any contract value, at any stage — there is no minimum. Every deal gets treated as significant. Loop Boss in when things are moving, not only when something goes wrong.
 - Any pricing deviation, discount, or non-standard commercial term
 - Any legal or compliance concern, regardless of size
 - Any request outside Hermes's documented authority in AGENTS.md
@@ -40,7 +40,5 @@ Always use this exact structure. No paragraphs. No over-explaining.
 
 ## Notes
 
-Confirm with Pedro before relying on defaults:
-- Deal value threshold for automatic escalation
-- Whether all discount decisions escalate or only above a percentage
-- Whether Filipe has full escalation authority equal to Pedro
+- All discount decisions escalate — there is no minimum percentage.
+- Filipe has full escalation authority equal to Pedro.
