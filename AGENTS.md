@@ -338,6 +338,32 @@ Skills provide tools. Check each skill's SKILL.md for usage. Keep environment-sp
 
 ---
 
+## Templates
+
+All reusable templates, structured formats, and document standards live in `templates/commercial/`.
+
+**Rule:** Any template referenced by more than one agent, or used across more than one workflow, must exist as a standalone file in `templates/commercial/` — not only embedded inside an agent's AGENTS.md. Agent files reference the template path; they do not duplicate it.
+
+**Current templates:**
+
+| File | Used By | Purpose |
+|---|---|---|
+| `sdr-handoff-brief.md` | SDR → AE | Lead handoff when meeting is booked |
+| `ae-discovery-log.md` | AE | Post-call Airtable log (mandatory same day) |
+| `ae-atlas-trigger.md` | AE → ATLAS | Technical scope request via #briefings |
+| `ae-legal-trigger.md` | AE → Legal | Contract drafting trigger on Closed Won |
+| `ae-am-handoff-brief.md` | AE → AM | Client handoff on contract signature |
+| `ae-loss-debrief.md` | AE → Knowledge Curator | Mandatory debrief before closing Lost deal |
+| `am-onboarding-checklist.md` | AM → HERMES | Day 1/7/14/30 onboarding tracker and Day 30 summary |
+| `am-health-score-report.md` | AM → HERMES | Every-heartbeat health score report for all active clients |
+| `am-renewal-brief.md` | AM → HERMES | 90-day renewal brief, triggers Boss approval chain |
+| `am-churn-intervention-brief.md` | AM → HERMES | Immediate brief when At Risk or Critical triggered |
+| `am-expansion-signal.md` | AM → HERMES | Upsell/expansion opportunity flag — AM never pitches directly |
+
+**When adding a new template:** create the file in `templates/commercial/`, add a row to this table, and update MEMORY.md.
+
+---
+
 ## Automated Workflows
 
 ### Agent-to-Channel Mapping

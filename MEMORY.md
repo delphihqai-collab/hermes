@@ -80,6 +80,18 @@ Key rules learned:
 - **Medium:** Inbound leads, proposal follow-ups, onboarding updates
 - **Low:** Newsletters, market intelligence digests, social
 
+## Permanent References
+
+These paths are canonical. Check here before creating any new template, format, or structured document.
+
+| Path | Contents |
+|---|---|
+| `templates/commercial/` | All reusable commercial agent templates — SDR handoff brief, AE discovery log, ATLAS trigger, Legal trigger, AM handoff brief, loss debrief, AM onboarding checklist, AM health score report, AM renewal brief, AM churn intervention brief, AM expansion signal |
+
+Rule: any reusable template referenced by more than one agent lives here as a standalone file. Agent AGENTS.md files reference the path — they do not duplicate the template.
+
+---
+
 ## System Health
 - Heartbeat monitors pipeline state, proposal status, active client health, and Airtable/Google Workspace connectivity
 - Weekly review feeds into NEXUS Friday report
