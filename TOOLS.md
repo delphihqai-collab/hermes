@@ -62,6 +62,33 @@
 - Available: Primarily mornings
 - Contact: Discord DM / <#1477060385596248134>
 
+## Heartbeat Cron Jobs
+
+Two jobs are scheduled in the OpenClaw native cron system (stored in gateway config, not system crontab — no sudo required).
+
+| Job | ID | Schedule | Timezone |
+|---|---|---|---|
+| hermes-midday-update | b21cfc56-83e0-460b-8908-a83e273f0fe5 | `0 12 * * 1-5` (12:00 Mon–Fri) | Europe/Lisbon |
+| hermes-afternoon-update | 445294a1-6689-406b-8688-15f0826995e2 | `0 18 * * 1-5` (18:00 Mon–Fri) | Europe/Lisbon |
+
+### How they work
+Each job fires a `systemEvent` into the main session. The event instructs Hermes to read the boss-status-updates playbook, compile the update, and post it to #hermes-chat. A one-line confirmation is logged to #hermes-logs after each run.
+
+### Trigger mechanism
+- **Type:** OpenClaw native cron (`sessionTarget: main`, `payload.kind: systemEvent`)
+- **Gateway:** `127.0.0.1:18789`
+- **Managed via:** OpenClaw `cron` tool — list, update, enable/disable without touching system files
+
+### Logging
+- **Discord log channel:** #hermes-logs (1477061135269363974) — one-line confirmation after each run
+- **No local log file** — OpenClaw cron handles job history natively; check via `cron list` or the dashboard
+
+### Important notes
+- Jobs survive gateway restarts — they are stored in gateway config
+- **The OpenClaw gateway itself does NOT auto-start on reboot.** If PC2 reboots and the gateway is not running, these cron jobs will not fire. Manual gateway start required after any reboot.
+- To disable a job: use `cron update` with `enabled: false`
+- To check last run: use `cron runs` with the job ID
+
 ## Timezone & Locale
 
 - Timezone: WET/WEST (Porto, Portugal — UTC+0 / UTC+1 in summer)
