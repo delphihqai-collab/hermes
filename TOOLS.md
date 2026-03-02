@@ -86,9 +86,5 @@ No SSH needed. Paste the gateway token in dashboard Settings on first connect.
 - Machine name: hermes
 - Account: delphihq.ai@gmail.com
 
-### Boot Notification Service
-- Service: hermes-boot-notify.service
-- Script: /usr/local/bin/hermes-boot-notify.sh
-- Channel: #hermes-chat
-- Message fires on every boot confirming PC2 is online and dashboard URL.
+
 
