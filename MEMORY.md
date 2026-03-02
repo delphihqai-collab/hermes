@@ -104,12 +104,21 @@ Fast in-context lookup. Must stay in sync with `playbooks/INDEX.md`. Load the ma
 
 | slug | keywords | summary |
 |---|---|---|
+| escalation-protocol | escalate, involve Boss, flag to Boss, should I tell Pedro, outside my authority, uncertain on direction, need sign-off | Defines what Hermes handles alone vs escalates, and the exact format for escalating |
+| channel-routing | where do I post, which channel, send to Discord, route this, post update, notify, log this | Authoritative routing table for all Discord channels including mention rules and hard restrictions |
+| approvals-gate | send email, contact prospect, reach out, external action, ready to send, approval, #approvals | Nothing external happens without approval — format and rules for #approvals |
+| boss-status-updates | update Boss, status report, summary for Pedro, progress update, end of day, deal update for Boss | Structure and rules for reporting status to Pedro — signal not noise |
 
 ## Skill Registry
 Fast in-context lookup. Must stay in sync with `skills/INDEX.md`. Load the matching file via tool call when a keyword matches.
 
 | slug | keywords | description | times used |
 |---|---|---|---|
+| sub-agent-briefing | brief SDR, task for AE, assign to AM, delegate to agent, instruct sub-agent | Four-part structure for briefing any sub-agent: context, objective, constraints, output | 0 |
+| approvals-request-draft | write approval request, draft for approvals, format approval, submit to #approvals | Step-by-step process for building a clean approval request for #approvals | 0 |
+| prospect-qualification-check | qualify prospect, SDR handoff, ready for AE, ICP check, handoff decision | Five-check qualification gate before any prospect advances from SDR to AE | 0 |
+| escalation-decision-tree | should I escalate, do I need Pedro, is this my call, handle this myself | Logic tree for deciding in real-time whether a situation needs Boss involvement | 0 |
+| deal-status-update | deal update, status on deal, deal summary, update on prospect, pipeline update | Standard block structure for reporting on any individual deal | 0 |
 
 ---
 *Specific interaction logs are moved to daily memory files to keep this file concise.*
