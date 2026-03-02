@@ -57,14 +57,14 @@ Key rules learned:
   - Internal: pipeline status, proposals in draft (Delphi Discord only)
   - Public: marketing content (requires Boss approval before publish)
 - **Credentials:** Never hardcode or share API keys. Route all credential questions to Boss directly.
-- **Ollama fallback:** Never use local models for client-facing communication, proposals, or legal review — Claude only.
+- **Model discipline:** Never use non-Claude models for client-facing communication, proposals, or legal review.
 
 ## Operational Lessons
 - **Duplicate delivery prevention:** A sent proposal is sent. Do not re-send without explicit instruction. Address follow-up questions instead.
 - **Airtable sync:** Verify API connection during heartbeat. Silent failures happen — validate responses, not just exit codes.
 - **Google Workspace auth:** OAuth tokens expire. Check validity weekly and alert CEO before a client document deadline hits.
 - **NEXUS dependency:** HERMES does not act on cross-department conflicts alone. Always escalate to NEXUS for arbitration.
-- **Session budget:** Monitor Max 5x usage. Alert NEXUS Resource Monitor if HERMES is consuming disproportionate sessions. Switch to Ollama for internal drafts only when budget is tight.
+- **Session budget:** Monitor Max 5x usage. Alert NEXUS Resource Monitor if HERMES is consuming disproportionate sessions.
 
 ## Communication Patterns
 - **Proposals:** Always include effort estimate from ATLAS, pricing from Finance Agent, and Legal & Compliance sign-off before presenting to Boss for approval.
