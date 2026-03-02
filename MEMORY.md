@@ -98,4 +98,18 @@ Rule: any reusable template referenced by more than one agent lives here as a st
 - All commercial learnings indexed to Knowledge Base after each closed deal, lost proposal, or completed onboarding
 
 ---
+
+## Playbook Registry
+Fast in-context lookup. Must stay in sync with `playbooks/INDEX.md`. Load the matching file via tool call when a keyword matches.
+
+| slug | keywords | summary |
+|---|---|---|
+
+## Skill Registry
+Fast in-context lookup. Must stay in sync with `skills/INDEX.md`. Load the matching file via tool call when a keyword matches.
+
+| slug | keywords | description | times used |
+|---|---|---|---|
+
+---
 *Specific interaction logs are moved to daily memory files to keep this file concise.*
