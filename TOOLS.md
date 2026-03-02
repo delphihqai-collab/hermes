@@ -69,3 +69,26 @@
 - Date format: DD/MM/YYYY
 - Language: English (default), Portuguese for local clients
 
+## Remote Access
+
+### How It Works
+Tailscale creates a private encrypted network between PC2 and any authorised external device. Dashboard is accessible from anywhere via a permanent HTTPS URL — no port forwarding, no dynamic IPs, no router config. PC2 posts to #hermes-chat on every boot confirming it's online.
+
+### Dashboard Access
+Open this URL in any browser on any device that has Tailscale installed and signed into the same account:
+
+**https://hermes.tail280e9c.ts.net**
+
+No SSH needed. Paste the gateway token in dashboard Settings on first connect.
+
+### PC2 Tailscale Details
+- Tailscale IP: 100.99.147.97 (permanent)
+- Machine name: hermes
+- Account: delphihq.ai@gmail.com
+
+### Boot Notification Service
+- Service: hermes-boot-notify.service
+- Script: /usr/local/bin/hermes-boot-notify.sh
+- Channel: #hermes-chat
+- Message fires on every boot confirming PC2 is online and dashboard URL.
+
