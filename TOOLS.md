@@ -125,5 +125,37 @@ No SSH needed. Paste the gateway token in dashboard Settings on first connect.
 - Machine name: hermes
 - Account: delphihq.ai@gmail.com
 
+## Native Skills
+
+Skills live at `workspace/skills/` and are loaded automatically by OpenClaw. Changes take effect on the next session or after gateway restart.
+
+**git-commit-discipline**
+- Directory: `workspace/skills/git-commit-discipline/`
+- Purpose: Pre-commit registry sync check and commit message format enforcement
+- Script: `scripts/check-registry-sync.sh` — run before every commit
+
+**session-wrap-up**
+- Directory: `workspace/skills/session-wrap-up/`
+- Purpose: End-of-session daily notes flush, MEMORY.md synthesis, commit all changes, verify cron jobs, post to #hermes-logs
+- Also handles: OpenClaw compaction memory flush events
+
+**memory-search-on-task-start**
+- Directory: `workspace/skills/memory-search-on-task-start/`
+- Purpose: Context re-anchor at task start — registry check, relevant file loading, compaction recovery
+
+**discord-post-formatter**
+- Directory: `workspace/skills/discord-post-formatter/`
+- Purpose: Channel routing enforcement, financial data separation, mention validation, per-channel format enforcement
+- Reference: `references/channels.md` — full channel ID table
+
+---
+
+**Directory separation:**
+- `workspace/skills/` — native OpenClaw skills (tool-integrated, auto-loaded)
+- `workspace/runbooks/` — behavioral procedures (read on demand via registry)
+- `workspace/playbooks/` — Boss standing orders (read on demand via registry)
+
+Do not mix content between these three directories.
+
 
 
