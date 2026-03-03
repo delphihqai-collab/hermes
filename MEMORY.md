@@ -91,6 +91,10 @@ Key rules learned:
 - **Google Workspace auth:** OAuth tokens expire. Check validity weekly and alert CEO before a client document deadline hits.
 - **NEXUS dependency:** HERMES does not act on cross-department conflicts alone. Always escalate to NEXUS for arbitration. (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 - **NEXUS fallback:** NEXUS is not yet active. Any situation that would normally route to NEXUS (cross-department conflict, resource arbitration, weekly report consolidation) escalates directly to Boss via <#1477060385596248134> until NEXUS becomes operational. When NEXUS is active, remove this note.
+- **Native skills — confirmation method:** `openclaw skills list` only shows the bundled manifest. Custom skill confirmation requires checking `<available_skills>` in a fresh session's system prompt. That is the ground truth.
+- **Session snapshots:** Skills are snapshotted at session start. New or updated skills require a fresh session to become active. This is expected OpenClaw behavior, not a bug.
+- **Skills — two locations:** `workspace/skills/` is the git-tracked source. `~/.openclaw/skills/` is the active copy scanned by OpenClaw. Both must be in sync. After any edit to workspace/skills/, run: `cp -r workspace/skills/<name> ~/.openclaw/skills/`
+- **Gateway process manager:** The gateway runs under OpenClaw's own process manager (not systemd, not nohup). Correct restart command to be confirmed and documented in TOOLS.md before next use.
 
 ## Communication Patterns
 - **Proposals:** Always include effort estimate from ATLAS, pricing from Finance Agent, and Legal & Compliance sign-off before presenting to Boss for approval.
