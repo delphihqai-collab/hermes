@@ -1,12 +1,8 @@
 ---
 name: session-wrap-up
-description: End-of-session routine for Hermes. Run at the close of every working session to flush daily notes, synthesise durable learnings to MEMORY.md, commit all uncommitted workspace changes, and verify the three heartbeat cron jobs are live. Triggers on: wrap up, end session, session end, end of day, before I go, closing down, finishing up, compaction preparation, save session, daily close, EOD routine, session close. Also activates automatically when OpenClaw triggers a memory flush before context compaction.
+description: End-of-session routine for Hermes. Run at the close of every working session to flush daily notes, synthesise durable learnings to MEMORY.md, commit all uncommitted workspace changes, and verify the three heartbeat cron jobs are live. Triggers on: wrap up, end session, session end, end of day, before I go, closing down, finishing up, compaction preparation, save session, daily close, EOD routine, session close. Also activates when OpenClaw triggers a memory flush before context compaction.
 version: 1.0.0
-metadata:
-  openclaw:
-    emoji: "🔒"
-  requires:
-    bins: ["git"]
+metadata: { "openclaw": { "emoji": "🔒", "requires": { "bins": ["git"] } } }
 ---
 
 # Session Wrap-Up

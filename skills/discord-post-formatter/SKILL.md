@@ -2,9 +2,7 @@
 name: discord-post-formatter
 description: Discord message routing and format enforcement for Hermes. Use before posting any message to any Discord channel — including status updates, approvals, pipeline reports, standup posts, heartbeat logs, financial summaries, client alerts, and escalations. Triggers on: post to Discord, send message, post update, message to channel, send to channel, Discord post, notify channel, post in, write to channel, channel message, post approval, log to hermes-logs, standup post, status update, pipeline update, financial update, escalation message, client alert, post confirmation.
 version: 1.0.0
-metadata:
-  openclaw:
-    emoji: "📡"
+metadata: { "openclaw": { "emoji": "📡" } }
 ---
 
 # Discord Post Formatter

@@ -2,11 +2,7 @@
 name: git-commit-discipline
 description: Enforce workspace commit discipline for Hermes. Use this skill whenever committing workspace changes to git — including after adding or updating playbooks, runbooks, skills, config files, daily notes, or any workspace file. Triggers on: commit, git commit, push changes, commit workspace, save changes to git, commit and push, update repository, git push. Runs a pre-commit registry sync check before every commit and enforces the correct commit message format.
 version: 1.0.0
-metadata:
-  openclaw:
-    emoji: "📦"
-  requires:
-    bins: ["git"]
+metadata: { "openclaw": { "emoji": "📦", "requires": { "bins": ["git"] } } }
 ---
 
 # Git Commit Discipline

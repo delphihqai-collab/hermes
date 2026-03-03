@@ -157,5 +157,16 @@ Skills live at `workspace/skills/` and are loaded automatically by OpenClaw. Cha
 
 Do not mix content between these three directories.
 
+**IMPORTANT — COPY REQUIREMENT:**
+Skills must exist in both locations:
+- `workspace/skills/` — git-tracked source of truth
+- `~/.openclaw/skills/` — active copy scanned by OpenClaw
+
+OpenClaw scans `~/.openclaw/skills/` unconditionally. `workspace/skills/` is also registered via `skills.load.extraDirs` in `openclaw.json`. Any time a skill is updated in `workspace/skills/`, run:
+```
+cp -r workspace/skills/<skill-name> ~/.openclaw/skills/
+```
+Then start a fresh session — skills are snapshotted at session start and do not hot-reload into existing sessions.
+
 
 

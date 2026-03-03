@@ -2,9 +2,7 @@
 name: memory-search-on-task-start
 description: Context anchor and registry check for Hermes. Run at the start of any non-trivial task to verify playbook and runbook registries are in context, recover them after compaction if missing, and surface any relevant playbooks or runbooks for the task about to begin. Triggers on: starting a task, beginning work, let me work on, I need to, working on, about to, starting now, new task, before I begin, task start, picking this up, context check, registry check, what playbooks apply, what runbooks apply, compaction recovery, lost context, after compaction.
 version: 1.0.0
-metadata:
-  openclaw:
-    emoji: "🧭"
+metadata: { "openclaw": { "emoji": "🧭" } }
 ---
 
 # Memory Search on Task Start
