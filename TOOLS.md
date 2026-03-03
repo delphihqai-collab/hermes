@@ -101,6 +101,69 @@ Each job fires a `systemEvent` into the main session. The event instructs Hermes
 - To disable a job: use `cron update` with `enabled: false`
 - To check last run: use `cron runs` with the job ID
 
+---
+
+## Gateway Restart Procedure
+
+The gateway is NOT a systemd service — started manually. No process manager (pm2, screen, tmux, forever) is configured.
+
+### Process Identity
+- **User:** delphi
+- **Binary:** `/usr/bin/node` (via `/home/delphi/.nvm/versions/node/v22.22.0/bin/openclaw` → `../lib/node_modules/openclaw/openclaw.mjs`)
+- **Start command:** `openclaw gateway start`
+- **Health check:** `curl -s http://127.0.0.1:18789/health` (returns dashboard HTML when up — any response = up)
+- **Log file:** `/home/delphi/.openclaw/logs/commands.log`
+
+### Find the Process
+```
+ps aux | grep openclaw-gateway | grep -v grep
+```
+
+### Normal Restart (gateway running — reload after config change)
+```
+# Kill the existing gateway process
+kill $(ps aux | grep openclaw-gateway | grep -v grep | awk '{print $2}')
+# Wait 2 seconds
+sleep 2
+# Start it again
+openclaw gateway start
+```
+
+### Recovery Restart (gateway down — after reboot or crash)
+```
+# Step 1: confirm it is down
+curl -s http://127.0.0.1:18789/health
+# No response = down
+
+# Step 2: start it
+openclaw gateway start
+
+# Step 3: wait 3 seconds, then verify
+sleep 3
+curl -s http://127.0.0.1:18789/health
+# Must get a response (dashboard HTML) before declaring it up
+
+# Step 4: check cron jobs
+openclaw cron list
+# Three jobs must be present — standup 09:00, midday 12:00, afternoon 18:00
+# If any missing: recreate them before finishing
+```
+
+### Post-Restart Checklist
+- [ ] Health check responds on localhost
+- [ ] Health check responds on Tailscale URL (`https://hermes.tail280e9c.ts.net/health`)
+- [ ] Three cron jobs present (standup 09:00, midday 12:00, afternoon 18:00)
+- [ ] Post to #hermes-logs: `Gateway restarted — [date] [time] — reason: [why] | Health: [OK / DEGRADED] | Crons: [all live / list any missing]`
+
+### Reboot Auto-Start
+**No auto-start mechanism exists.** A reboot leaves the gateway down silently until manually restarted. Cron jobs stop firing. Boss has no indication anything is wrong.
+
+Two options to fix (awaiting Boss direction):
+- **Option A:** systemd service — recommended for Linux, managed by OS, logs via journald, reliable
+- **Option B:** pm2 startup — lighter, easier to set up
+
+Do not implement either without explicit Boss approval.
+
 ## Timezone & Locale
 
 - Timezone: WET/WEST (Porto, Portugal — UTC+0 / UTC+1 in summer)
