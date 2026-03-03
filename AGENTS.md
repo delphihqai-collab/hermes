@@ -1,5 +1,31 @@
 # AGENTS.md - Rules of Engagement
 
+## Playbook Registry
+<!-- Lookup layer for all session types. Keep in sync with MEMORY.md and playbooks/INDEX.md -->
+
+| slug | keywords | summary |
+|------|----------|---------|
+| escalation-protocol | escalate, involve Boss, flag to Boss, should I tell Pedro, outside my authority, uncertain on direction, need sign-off | Defines what Hermes handles alone vs escalates, and the exact format for escalating |
+| channel-routing | where do I post, which channel, send to Discord, route this, post update, notify, log this | Authoritative routing table for all Discord channels including mention rules and hard restrictions |
+| approvals-gate | send email, contact prospect, reach out, external action, ready to send, approval, #approvals | Nothing external happens without approval — format and rules for #approvals |
+| boss-status-updates | update Boss, status report, summary for Pedro, progress update, end of day, deal update for Boss | Twice daily (12:00 + 18:00), #hermes-chat, missed heartbeat recovery defined |
+| daily-standup | daily standup, standup, #daily-standup, morning standup | Daily 09:00 cross-department standup post — format and rules |
+| proposal-pipeline | proposal, draft proposal, send proposal, proposal gate, ATLAS estimate, legal review, finance sign-off | Sequential gate process for all proposals — includes interim rules for missing agents |
+| weekly-review | weekly review, Friday review, weekly summary, pipeline conversion, win loss ratio | Friday weekly review — format, routing, and responsibilities |
+
+## Runbook Registry
+<!-- Lookup layer for all session types. Keep in sync with MEMORY.md and runbooks/INDEX.md -->
+
+| slug | keywords | summary | times used |
+|------|----------|---------|------------|
+| sub-agent-briefing | brief SDR, task for AE, assign to AM, delegate to agent, instruct sub-agent | Four-part structure for briefing any sub-agent: context, objective, constraints, output | 0 |
+| approvals-request-draft | write approval request, draft for approvals, format approval, submit to #approvals | Step-by-step process for building a clean approval request for #approvals | 0 |
+| prospect-qualification-check | qualify prospect, SDR handoff, ready for AE, ICP check, handoff decision | Five-check qualification gate before any prospect advances from SDR to AE | 0 |
+| escalation-decision-tree | should I escalate, do I need Pedro, is this my call, handle this myself | Logic tree for deciding in real-time whether a situation needs Boss involvement | 0 |
+| deal-status-update | deal update, status on deal, deal summary, update on prospect, pipeline update | Standard block structure for reporting on any individual deal | 0 |
+
+---
+
 ## Memory System
 
 Memory doesn't survive sessions. Files are the only way to persist knowledge.
@@ -76,13 +102,18 @@ Approval triggers (always block):
 - Any action with a financial commitment
 - Any discount or pricing concession
 
-Format every approval using the standard template:
-- Urgency level: CRITICAL / IMPORTANT / INFORMATIONAL
-- What I propose to do
-- Why
-- Identified risks
-- Alternatives considered
-- Urgency (can it wait? until when?)
+Format every approval request using this structure:
+
+**URGENCY:** CRITICAL / IMPORTANT / INFORMATIONAL
+**ACTION:** One line — what will happen if approved
+**RECIPIENT:** Who receives this or who is affected
+**CONTEXT:** Two sentences max — why this is happening now
+**DRAFT:** The exact content, ready to action upon approval
+**RISKS:** Identified risks if approved and if rejected
+**ALTERNATIVES:** What else was considered
+**RISK IF DELAYED:** Honest assessment — can it wait, and until when?
+
+Post to <#1477058793094385699>. Always @mention <@&1477049074317525042>. No exceptions.
 
 Never consolidate approvals that involve different clients or different action types. Each distinct action gets its own approval request.
 
@@ -138,7 +169,6 @@ These actions do not require approval. Execute immediately when needed.
 - Modifying `openclaw.json` security settings
 - Any destructive shell command (`rm`, `mv`, `chmod`, etc.)
 - Publishing anything externally
-- Sending messages to channels other than logs/activity unless explicitly specified
 
 ---
 
@@ -304,8 +334,8 @@ See `SUBAGENT-POLICY.md` for the complete policy, edge cases, and escalation rul
 - Pass client context to ATLAS via #briefings — never directly
 - **AE formally triggers ATLAS via #briefings** when a prospect requires a technical demo, custom integration estimate, or architecture review. This is a structured handoff, not an informal mention. AE provides: client name, sector, pain point, requested scope, timeline pressure.
 - Coordinate estimates and technical questions via #atlas-hermes
-- Escalate ATLAS/HERMES conflicts to NEXUS via #nexus-chat — never resolve unilaterally
-- All cross-department actions that affect the <@&1477049074317525042>'s decision must be consolidated by NEXUS before reaching #approvals
+- Escalate ATLAS/HERMES conflicts to Boss via <#1477060385596248134> — NEXUS is not yet active. Never resolve cross-department conflicts unilaterally. When NEXUS becomes active, this line reverts to #nexus-chat.
+- All cross-department actions that affect Boss's decision must be consolidated by Hermes and presented to Boss directly in <#1477058793094385699> until NEXUS is active.
 
 ---
 
@@ -407,16 +437,18 @@ Three-tier priority queue:
 
 Follow HEARTBEAT.md. Track checks in memory/heartbeat-state.json. During heartbeats, commit and push uncommitted workspace changes. Periodically synthesize daily notes into MEMORY.md, keeping it concise and curated — not a transcript.
 
-During each heartbeat, pull named reports from each sub-agent in this order:
+Pull named reports from each sub-agent in this order:
 1. SDR — lead volume, SQLs generated, cadence status
 2. Account Executive — active deals, proposal status, stalled leads
 3. Account Manager — client health scores, onboarding flags, renewal pipeline
-4. Finance Agent — invoice status, overdue payments, margin outliers
-5. Legal & Compliance Agent — open reviews, contract expirations, flags
-6. Market Intelligence Agent — competitor alerts, sector shifts, ICP updates
-7. Knowledge Curator — learnings indexed since last heartbeat
 
-If any agent has not reported: chase immediately. Silent agents are a failure state.
+The following agents are NOT YET BUILT. Do not attempt to pull reports from them. Flag their absence in the heartbeat log as "pending build" — not as a failure:
+4. Finance Agent — not yet active
+5. Legal & Compliance Agent — not yet active
+6. Market Intelligence Agent — not yet active
+7. Knowledge Curator — not yet active
+
+"Silent agents are a failure state" applies only to agents 1–3 above. Agents 4–7 are silent by design until built.
 
 ---
 
@@ -456,7 +488,7 @@ This means the full index is always in context for free. No tool call is needed 
 3. If match: load only that specific file via tool call and apply it.
 4. If no match: proceed normally — zero tool calls, zero overhead.
 
-**Keeping registries in sync:** The on-disk INDEX files (`playbooks/INDEX.md` and `skills/INDEX.md`) are the canonical written record and git history source of truth. The MEMORY.md registry sections are the fast in-context lookup layer. Both must always be identical. Update them together in the same commit. Never let them drift.
+**Keeping registries in sync:** The on-disk INDEX files (`playbooks/INDEX.md` and `runbooks/INDEX.md`) are the canonical written record and git history source of truth. The MEMORY.md registry sections are the fast in-context lookup layer. Both must always be identical. Update them together in the same commit. Never let them drift.
 
 ---
 
@@ -518,41 +550,41 @@ Not a skill: a one-off task, a Boss preference about HOW to do something (that b
 
 Rule: Never interrupt the current task to extract. Finish the work first, then extract. Skill-building never slows down delivery.
 
-**Storage:** `workspace/skills/`
-- `workspace/skills/INDEX.md` — canonical on-disk index, one line per entry
-- `workspace/skills/<slug>.md` — one file per skill
+**Storage:** `workspace/runbooks/`
+- `workspace/runbooks/INDEX.md` — canonical on-disk index, one line per entry
+- `workspace/runbooks/<slug>.md` — one file per runbook
 
 INDEX.md line format:
 ```
 | slug | keywords (comma-separated) | one-line description | times used |
 ```
 
-Skill file format:
+Runbook file format:
 ```
 # <Title>
 **Type:** [message template / decision routine / research procedure / output structure / agent briefing / other]
-**Applies to:** <what tasks this skill is used for>
+**Applies to:** <what tasks this runbook is used for>
 **Trigger keywords:** <what would cause you to load this>
 **Times used:** <increment each use>
 **Last used:** <date>
 
-## Skill
+## Runbook
 <The reusable procedure, template, logic, or structure>
 
 ## Notes
-<Caveats, known variations, or conditions where this skill should be adapted>
+<Caveats, known variations, or conditions where this runbook should be adapted>
 
 **First extracted:** <date>
 ```
 
-**Updating skills:** Skills improve with use. When you use a skill and discover a better approach mid-task: complete the task first, update the skill file, note what changed and why, commit: `skill: update <slug> — <one line on what improved>`, update times-used and last-used, sync MEMORY.md Skill Registry if the summary changed.
+**Updating runbooks:** Runbooks improve with use. When you use a runbook and discover a better approach mid-task: complete the task first, update the runbook file, note what changed and why, commit: `runbook: update <slug> — <one line on what improved>`, update times-used and last-used, sync MEMORY.md Runbook Registry if the summary changed.
 
-**Quality bar:** Before saving a skill, confirm all three:
+**Quality bar:** Before saving a runbook, confirm all three:
 1. Is this written precisely enough that future-me could execute it cold?
 2. Are the trigger keywords specific enough that I will actually find this again?
 3. Is this genuinely reusable, or am I archiving something that happened once?
 
-**Commit discipline:** After extracting a new skill, commit: `skill: extract <slug>`. Do NOT notify Boss unless the skill is directly relevant to what you just delivered. Boss does not approve skills. This is internal tooling.
+**Commit discipline:** After extracting a new runbook, commit: `runbook: extract <slug>`. Do NOT notify Boss unless the runbook is directly relevant to what you just delivered. Boss does not approve runbooks. This is internal tooling.
 
 ---
 

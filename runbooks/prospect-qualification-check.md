@@ -6,7 +6,7 @@
 **Times used:** 0
 **Last used:** —
 
-## Skill
+## Runbook
 
 Run this check before any SDR-to-AE handoff. If a prospect fails, they go back to SDR for nurture or are disqualified. Do not let bad fits consume AE time.
 

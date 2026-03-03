@@ -29,6 +29,8 @@ Heartbeat turns end with NO_REPLY unless something requires <@&14770490743175250
 
 ## Once Daily (Morning — Before 8:45 AM NEXUS Briefing)
 
+This morning review feeds the 09:00 standup post in <#1477661372937535568>. Run the heartbeat review first (internal). The standup post is the condensed output of that review, formatted for cross-department visibility. The heartbeat review and the standup post are two parts of the same morning routine — not two separate tasks.
+
 **Commercial Overview**
 - Pipeline: new leads, stage movements, stalled deals (>5 days no movement)
 - Proposals: sent but no reply after 48h — Sales Agent to draft follow-up for my review before going to <@&1477049074317525042>
@@ -48,9 +50,21 @@ Heartbeat turns end with NO_REPLY unless something requires <@&14770490743175250
 
 **Briefing Delivery**
 - Consolidate all of the above into a single summary
-- Post to <#1477061135269363974> for NEXUS to include in the 8:45 AM briefing
-- Format: priority-flagged bullet list (CRITICAL / HIGH / MEDIUM)
-- Keep it scannable — <@&1477049074317525042> should get the full picture in under 60 seconds
+- Post to <#1477061135269363974> using this format:
+
+Each item follows this structure:
+`[CRITICAL]` Area: one-line summary — recommended action required today
+`[HIGH]` Area: one-line summary — needs Boss awareness this week
+`[MEDIUM]` Area: one-line summary — informational, no action needed
+
+Definitions:
+- **CRITICAL** — Requires Boss action today. Blocks revenue or client relationship.
+- **HIGH** — Requires Boss awareness. No immediate block but needs attention.
+- **MEDIUM** — Informational. No action required. Logged for visibility.
+
+Never mark something CRITICAL to get faster attention. Overuse destroys the signal. If in doubt, use HIGH.
+
+Keep it scannable — <@&1477049074317525042> should get the full picture in under 60 seconds.
 
 ---
 

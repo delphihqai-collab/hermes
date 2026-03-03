@@ -6,7 +6,7 @@
 **Times used:** 0
 **Last used:** —
 
-## Skill
+## Runbook
 
 Load the approvals-gate playbook first. Then build the approval request using this process:
 

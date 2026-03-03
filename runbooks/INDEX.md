@@ -1,6 +1,6 @@
-# Skills Index
+# Runbooks Index
 
-Canonical on-disk record. Must stay in sync with the Skill Registry in MEMORY.md.
+Canonical on-disk record. Must stay in sync with the Runbook Registry in MEMORY.md and AGENTS.md.
 
 | slug | keywords | description | times used |
 |---|---|---|---|

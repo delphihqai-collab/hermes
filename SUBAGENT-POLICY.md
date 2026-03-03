@@ -8,6 +8,27 @@ This is not about offloading to avoid work. It is about keeping the department r
 
 ---
 
+## OpenClaw Technical Limits
+
+These are hard constraints from OpenClaw's runtime. Work within them.
+
+**MAX CONCURRENT SUBAGENTS: 8** (configured in openclaw.json)
+Do not spawn more than 8 subagents simultaneously. In practice, keep active concurrent subagents well below this ceiling — the config cap is a hard limit, not a target.
+
+**MAX SPAWN DEPTH: 1 by default (max 2 if configured)**
+Subagents cannot spawn their own subagents by default. Design all delegation workflows assuming subagents are leaf nodes — they do the work and report back. They cannot orchestrate further.
+
+**SUBAGENT TOOLS: Restricted by default**
+Subagents do not receive session tools (sessions_spawn, sessions_send, etc.) by default. They get: read, write, edit, exec, process, image. Never design a workflow that requires a subagent to spawn further subagents unless maxSpawnDepth has been explicitly reconfigured.
+
+**SUBAGENT CONTEXT: Not inherited from main session**
+Subagents run with a smaller, independent context. They do not have access to the main session's conversation history, playbooks, or runbooks unless Hermes explicitly includes the relevant instructions in the task prompt. Every subagent task prompt must be self-contained. Include all context the subagent needs to complete the task — do not assume it has any.
+
+**AUTO-ARCHIVE: 60 minutes**
+Subagent sessions are automatically archived after 60 minutes of inactivity. For any task expected to take longer than 45 minutes, break it into smaller tasks or check in on the subagent's progress before the archive window.
+
+---
+
 ## When to Use a Subagent
 
 ### Always Delegate
@@ -36,13 +57,21 @@ This is not about offloading to avoid work. It is about keeping the department r
 These rules are specific to the HERMES department and override the general rules above when they conflict.
 
 ### Proposals
-Every proposal involves multiple agents. Spawn subagents for each gate:
-1. One subagent for the ATLAS technical estimate request (posts to #briefings, waits for response)
-2. One subagent for Legal & Compliance review
-3. One subagent for Finance pricing validation
-4. Main session consolidates outputs and presents to <@&1477049074317525042> for approval
+Every proposal involves multiple sequential gates. Do not run gates in parallel.
 
-Never run these gates in parallel. They are sequential by design. A subagent for gate 2 does not start until gate 1 is confirmed complete.
+**Gate 1 — ATLAS technical estimate**
+Spawn one subagent to post the scope request to <#1477660404183466125> and wait for ATLAS response. Do not proceed to Gate 2 until ATLAS confirms or declines.
+
+**Gate 2 — Legal & Compliance review**
+LEGAL AGENT NOT YET BUILT. Interim process: Post the draft proposal to <#1477060520090669228> with @mention Boss. Flag in the message: "Legal & Compliance agent not yet active — manual review required." Wait for Boss confirmation before proceeding to Gate 3.
+
+**Gate 3 — Finance pricing validation**
+FINANCE AGENT NOT YET BUILT. Interim process: Post the pricing summary to <#1477061004499353735> with @mention Boss. Flag in the message: "Finance agent not yet active — manual pricing review required." Wait for Boss confirmation before proceeding to Gate 4.
+
+**Gate 4 — Boss approval**
+Main session consolidates all gate outputs and presents to Boss via the standard approval format in <#1477058793094385699>.
+
+Remove the interim flags once the agents are built. These interim processes are temporary.
 
 ### Research and Market Intelligence
 All competitor research, sector analysis, and lead background checks go to subagents. The main session never blocks on a web search. Market Intelligence Agent runs as a background subagent on its own cadence — I do not spawn it on demand mid-conversation unless <@&1477049074317525042> explicitly requests it.
@@ -111,8 +140,12 @@ When delegating to a subagent, tell <@&1477049074317525042> what is happening an
 - "Sending proposal draft to Legal for review. Will have output shortly."
 - "Spawning a subagent to sync Airtable pipeline state."
 
+**Channel routing for announcements:**
+- Boss-initiated tasks: announce in <#1477060385596248134>
+- Heartbeat-triggered tasks (cron): announce in <#1477061135269363974> only. Do not post to <#1477060385596248134> for automated heartbeat work unless the result requires Boss attention. Boss should not receive unsolicited messages from automated runs.
+- For tasks over 30 seconds: one progress note to the appropriate channel above, one sentence only.
+
 For fast tasks (under 10 seconds), no announcement needed — just do it and deliver the result.
-For tasks over 30 seconds, one progress note is acceptable. One sentence only.
 
 ---
 
@@ -143,6 +176,7 @@ Limit active concurrent subagents to what is necessary. Spawning subagents unnec
 
 Every subagent must return a result that I can act on or present directly. Subagent output requirements:
 
+- **Self-contained:** Every subagent task prompt includes all context the subagent needs. Subagents do not have access to playbooks, runbooks, or the main session's conversation history. If the task requires following a specific runbook procedure, paste the relevant section of that runbook directly into the task prompt.
 - **Actionable:** The output answers the question or completes the task. No half-finished work.
 - **Classified:** The output is tagged with its data tier (Confidential, Internal, Restricted) before I route it
 - **Scoped:** The output addresses only what was asked. No tangential additions.

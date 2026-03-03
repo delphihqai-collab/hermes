@@ -6,7 +6,7 @@
 **Times used:** 0
 **Last used:** —
 
-## Skill
+## Runbook
 
 Every sub-agent brief follows this four-part structure. No part is optional. Missing a section creates ambiguity and bad output.
 

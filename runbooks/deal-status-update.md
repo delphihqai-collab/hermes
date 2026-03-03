@@ -6,7 +6,7 @@
 **Times used:** 0
 **Last used:** —
 
-## Skill
+## Runbook
 
 One deal = one update block. Never bundle multiple deals into a single narrative.
 

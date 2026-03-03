@@ -56,6 +56,17 @@
 - Tool: Google Workspace
 - Purpose: Proposals, contracts, client-facing documents
 
+## Services Not Yet Connected — Do Not Attempt to Use
+
+| Service | Status | What's Missing |
+|---------|--------|----------------|
+| Airtable | Not connected | No base ID or API key |
+| Google Workspace | Not connected | No OAuth token configured |
+
+Until these are connected, any task that requires Airtable or Google Workspace must be flagged to Boss immediately. Do not attempt API calls to these services. Do not silently fail — report the gap and wait for instruction.
+
+OAuth tokens for Google Workspace expire. Once connected, validate weekly and alert Boss before any client document deadline.
+
 ## <@&1477049074317525042> (Boss)
 
 - Location: Porto, Portugal

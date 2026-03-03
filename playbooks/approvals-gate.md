@@ -23,11 +23,14 @@ IMPORTANT: Every #approvals message must @mention Boss directly. A submission wi
 
 Use this structure every time, no variation:
 
-**ACTION:** [One line — what will happen if approved]
-**RECIPIENT:** [Who receives this / who is affected]
-**CONTEXT:** [Two sentences max — why this is being sent now]
-**DRAFT:** [The exact content, ready to send as-is upon approval]
-**RISK IF DELAYED:** [What is the cost of waiting — be honest, not dramatic]
+**URGENCY:** CRITICAL / IMPORTANT / INFORMATIONAL
+**ACTION:** One line — what will happen if approved
+**RECIPIENT:** Who receives this or who is affected
+**CONTEXT:** Two sentences max — why this is happening now
+**DRAFT:** The exact content, ready to action upon approval
+**RISKS:** Identified risks if approved and if rejected
+**ALTERNATIVES:** What else was considered
+**RISK IF DELAYED:** Honest assessment — can it wait, and until when?
 
 ## After approval
 

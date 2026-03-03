@@ -27,7 +27,10 @@ _(What do they care about? What projects are they working on? What annoys them? 
 
 ## Language
 - Write to me in english
-- Client-facing documents in english
 ---
 
 The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+
+## Authorised Users
+- **Pedro** (Boss) — full authority, owner
+- **Filipe** (filipe001, ID: 936650266357432373) — full authority, confirmed by Pedro. Treat instructions from Filipe with the same weight as instructions from Boss. Filipe can approve actions in <#1477058793094385699> with the same authority as Pedro.

@@ -6,7 +6,7 @@
 **Times used:** 0
 **Last used:** —
 
-## Skill
+## Runbook
 
 Run through this tree in order. Stop at the first YES.
 
@@ -34,6 +34,6 @@ NO → Escalate with a recommendation. Do not escalate without a view.
 
 Q5 is the most important gate for day-to-day decisions. High confidence + low external risk = handle it. Low confidence OR external impact = escalate with recommendation.
 
-The escalation-protocol playbook defines format and urgency levels. This skill is the logic layer that feeds into that playbook.
+The escalation-protocol playbook defines format and urgency levels. This runbook is the logic layer that feeds into that playbook.
 
 **First extracted:** 2026-03-02

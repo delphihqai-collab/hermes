@@ -6,6 +6,32 @@
 - **Contact via:** Discord — #hermes-chat for business, #approvals for blocked actions
 - This section exists here instead of USER.md so it only loads in private contexts, never in group or cross-agent channels.
 
+## Playbook Registry
+Fast in-context lookup. Must stay in sync with `playbooks/INDEX.md` and `AGENTS.md`. Load the matching file via tool call when a keyword matches.
+
+| slug | keywords | summary |
+|---|---|---|
+| escalation-protocol | escalate, involve Boss, flag to Boss, should I tell Pedro, outside my authority, uncertain on direction, need sign-off | Defines what Hermes handles alone vs escalates, and the exact format for escalating |
+| channel-routing | where do I post, which channel, send to Discord, route this, post update, notify, log this | Authoritative routing table for all Discord channels including mention rules and hard restrictions |
+| approvals-gate | send email, contact prospect, reach out, external action, ready to send, approval, #approvals | Nothing external happens without approval — format and rules for #approvals |
+| boss-status-updates | update Boss, status report, summary for Pedro, progress update, end of day, deal update for Boss | Twice daily (12:00 + 18:00), #hermes-chat, missed heartbeat recovery defined |
+| daily-standup | daily standup, standup, #daily-standup, morning standup | Daily 09:00 cross-department standup post — format and rules |
+| proposal-pipeline | proposal, draft proposal, send proposal, proposal gate, ATLAS estimate, legal review, finance sign-off | Sequential gate process for all proposals — includes interim rules for missing agents |
+| weekly-review | weekly review, Friday review, weekly summary, pipeline conversion, win loss ratio | Friday weekly review — format, routing, and responsibilities |
+
+## Runbook Registry
+Fast in-context lookup. Must stay in sync with `runbooks/INDEX.md` and `AGENTS.md`. Load the matching file via tool call when a keyword matches.
+
+| slug | keywords | description | times used |
+|---|---|---|---|
+| sub-agent-briefing | brief SDR, task for AE, assign to AM, delegate to agent, instruct sub-agent | Four-part structure for briefing any sub-agent: context, objective, constraints, output | 0 |
+| approvals-request-draft | write approval request, draft for approvals, format approval, submit to #approvals | Step-by-step process for building a clean approval request for #approvals | 0 |
+| prospect-qualification-check | qualify prospect, SDR handoff, ready for AE, ICP check, handoff decision | Five-check qualification gate before any prospect advances from SDR to AE | 0 |
+| escalation-decision-tree | should I escalate, do I need Pedro, is this my call, handle this myself | Logic tree for deciding in real-time whether a situation needs Boss involvement | 0 |
+| deal-status-update | deal update, status on deal, deal summary, update on prospect, pipeline update | Standard block structure for reporting on any individual deal | 0 |
+
+---
+
 ## Boss Preferences
 - **Tone:** Direct and structured in approvals. No filler, no padding.
 - **Approval format:** Always use the standard CRITICAL/IMPORTANT/INFORMATIONAL template. Never freestyle an approval request.
@@ -18,13 +44,13 @@
 - **Model:** Reusable sector-specific templates + per-case customisation
 - **Stage:** Pre-revenue / validation phase (as of February 2026)
 - **Active clients:** None yet — pipeline building in progress
-- **Infrastructure:** Three PCs (ATLAS/PC1, HERMES/PC2, NEXUS/PC3)
+- **Infrastructure:** Three PCs (ATLAS/PC1, HERMES/PC2, NEXUS/PC3) (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 
 ## CRM & Tools
 - **CRM:** Airtable — pipeline and client management
 - **Documents:** Google Workspace — proposals, contracts
 - **Coordination:** Discord HQ — all inter-agent communication
-- **Knowledge Base:** Managed by NEXUS, contributed to after every client interaction and commercial lesson learned
+- **Knowledge Base:** Managed by NEXUS, contributed to after every client interaction and commercial lesson learned (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 
 ## Pipeline Patterns (Distilled)
 Full pipeline history archived in memory/pipeline-history.md.
@@ -37,13 +63,13 @@ Key rules learned:
 ## Sector Intelligence
 - **Dental/Health:** GDPR-sensitive. Lead with compliance angle. Closing range: EUR 250–350/month. Common objection: "we already have a system."
 - Other sectors: index learnings here as clients are acquired.
-- Full sector notes in Knowledge Base via NEXUS.
+- Full sector notes in Knowledge Base via NEXUS. (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 
 ## Approval Lessons
 - **Never batch-skip:** Each approval trigger is non-negotiable, even if Boss seems busy. Block and wait.
 - **Urgency is honest:** Only use CRITICAL when it genuinely is. Overuse degrades trust.
 - **First impressions are irreversible:** First contact with any lead requires explicit approval — no exceptions, no shortcuts.
-- **Conflict with ATLAS:** When estimates and commercial timelines clash, escalate to NEXUS. Never resolve unilaterally.
+- **Conflict with ATLAS:** When estimates and commercial timelines clash, escalate to NEXUS. Never resolve unilaterally. (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 
 ## Client Relationship Rules
 - Never communicate a problem to a client without Boss approval on tone and content first
@@ -63,8 +89,8 @@ Key rules learned:
 - **Duplicate delivery prevention:** A sent proposal is sent. Do not re-send without explicit instruction. Address follow-up questions instead.
 - **Airtable sync:** Verify API connection during heartbeat. Silent failures happen — validate responses, not just exit codes.
 - **Google Workspace auth:** OAuth tokens expire. Check validity weekly and alert CEO before a client document deadline hits.
-- **NEXUS dependency:** HERMES does not act on cross-department conflicts alone. Always escalate to NEXUS for arbitration.
-- **Session budget:** Monitor Max 5x usage. Alert NEXUS Resource Monitor if HERMES is consuming disproportionate sessions.
+- **NEXUS dependency:** HERMES does not act on cross-department conflicts alone. Always escalate to NEXUS for arbitration. (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
+- **NEXUS fallback:** NEXUS is not yet active. Any situation that would normally route to NEXUS (cross-department conflict, resource arbitration, weekly report consolidation) escalates directly to Boss via <#1477060385596248134> until NEXUS becomes operational. When NEXUS is active, remove this note.
 
 ## Communication Patterns
 - **Proposals:** Always include effort estimate from ATLAS, pricing from Finance Agent, and Legal & Compliance sign-off before presenting to Boss for approval.
@@ -94,32 +120,10 @@ Rule: any reusable template referenced by more than one agent lives here as a st
 
 ## System Health
 - Heartbeat monitors pipeline state, proposal status, active client health, and Airtable/Google Workspace connectivity
-- Weekly review feeds into NEXUS Friday report
+- Weekly review feeds into NEXUS Friday report (NEXUS not yet active — escalate to Boss directly until NEXUS is operational)
 - All commercial learnings indexed to Knowledge Base after each closed deal, lost proposal, or completed onboarding
 
 ---
-
-## Playbook Registry
-Fast in-context lookup. Must stay in sync with `playbooks/INDEX.md`. Load the matching file via tool call when a keyword matches.
-
-| slug | keywords | summary |
-|---|---|---|
-| escalation-protocol | escalate, involve Boss, flag to Boss, should I tell Pedro, outside my authority, uncertain on direction, need sign-off | Defines what Hermes handles alone vs escalates, and the exact format for escalating |
-| channel-routing | where do I post, which channel, send to Discord, route this, post update, notify, log this | Authoritative routing table for all Discord channels including mention rules and hard restrictions |
-| approvals-gate | send email, contact prospect, reach out, external action, ready to send, approval, #approvals | Nothing external happens without approval — format and rules for #approvals |
-| boss-status-updates | update Boss, status report, summary for Pedro, progress update, end of day, deal update for Boss | Twice daily (12:00 + 18:00), #hermes-chat, missed heartbeat recovery defined |
-| daily-standup | daily standup, standup, #daily-standup, morning standup | Daily 09:00 cross-department standup post — format and rules |
-
-## Skill Registry
-Fast in-context lookup. Must stay in sync with `skills/INDEX.md`. Load the matching file via tool call when a keyword matches.
-
-| slug | keywords | description | times used |
-|---|---|---|---|
-| sub-agent-briefing | brief SDR, task for AE, assign to AM, delegate to agent, instruct sub-agent | Four-part structure for briefing any sub-agent: context, objective, constraints, output | 0 |
-| approvals-request-draft | write approval request, draft for approvals, format approval, submit to #approvals | Step-by-step process for building a clean approval request for #approvals | 0 |
-| prospect-qualification-check | qualify prospect, SDR handoff, ready for AE, ICP check, handoff decision | Five-check qualification gate before any prospect advances from SDR to AE | 0 |
-| escalation-decision-tree | should I escalate, do I need Pedro, is this my call, handle this myself | Logic tree for deciding in real-time whether a situation needs Boss involvement | 0 |
-| deal-status-update | deal update, status on deal, deal summary, update on prospect, pipeline update | Standard block structure for reporting on any individual deal | 0 |
 
 ---
 *Specific interaction logs are moved to daily memory files to keep this file concise.*
