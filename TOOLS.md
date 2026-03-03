@@ -68,6 +68,7 @@ Two jobs are scheduled in the OpenClaw native cron system (stored in gateway con
 
 | Job | ID | Schedule | Timezone |
 |---|---|---|---|
+| hermes-morning-standup | c2552946-6336-42e6-aa62-794b9e04f6a2 | `0 9 * * 1-5` (09:00 Mon–Fri) | Europe/Lisbon |
 | hermes-midday-update | b21cfc56-83e0-460b-8908-a83e273f0fe5 | `0 12 * * 1-5` (12:00 Mon–Fri) | Europe/Lisbon |
 | hermes-afternoon-update | 445294a1-6689-406b-8688-15f0826995e2 | `0 18 * * 1-5` (18:00 Mon–Fri) | Europe/Lisbon |
 

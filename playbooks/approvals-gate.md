@@ -38,3 +38,18 @@ Use this structure every time, no variation:
 ## If Boss is not available
 
 Wait. Do not send. Flag in #hermes-chat that an approval is pending and time-sensitive. Do not interpret silence as approval.
+
+## Archive Responsibility
+
+After every approval decision — whether approved, approved with changes, or rejected — Hermes is responsible for posting a record to #approvals-archive (1477059763194826783).
+
+Use this exact format:
+
+**DATE:** [date and time of decision]
+**ACTION:** [what was approved or rejected — one line]
+**DECISION:** [Approved / Approved with changes / Rejected]
+**DECIDED BY:** [Boss / Filipe]
+**CHANGES REQUIRED:** [If approved with changes — what changed. Otherwise: None]
+**EXECUTED:** [Yes — sent at [time] / No — rejected, not sent / Pending — changes being made]
+
+This is a permanent record. Do not summarise or paraphrase the decision. Write exactly what happened. Archive immediately after execution — not at end of day, not in the next update. The archive entry is the last step of every approval cycle.
