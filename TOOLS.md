@@ -156,13 +156,43 @@ openclaw cron list
 - [ ] Post to #hermes-logs: `Gateway restarted — [date] [time] — reason: [why] | Health: [OK / DEGRADED] | Crons: [all live / list any missing]`
 
 ### Reboot Auto-Start
-**No auto-start mechanism exists.** A reboot leaves the gateway down silently until manually restarted. Cron jobs stop firing. Boss has no indication anything is wrong.
+**User systemd service is configured and enabled.** OpenClaw installed its own service at:
+`/home/delphi/.config/systemd/user/openclaw-gateway.service`
 
-Two options to fix (awaiting Boss direction):
-- **Option A:** systemd service — recommended for Linux, managed by OS, logs via journald, reliable
-- **Option B:** pm2 startup — lighter, easier to set up
+- **Status:** enabled, active, running
+- **Linger:** yes — service starts at boot without requiring a login session
+- **Reboot gap:** closed — gateway comes back automatically after any reboot
 
-Do not implement either without explicit Boss approval.
+### Systemd Service Commands
+```bash
+# Check status
+systemctl --user status openclaw-gateway.service
+
+# Start (if down)
+systemctl --user start openclaw-gateway.service
+
+# Stop
+systemctl --user stop openclaw-gateway.service
+
+# Restart (after config change)
+systemctl --user restart openclaw-gateway.service
+
+# View recent logs
+journalctl --user -u openclaw-gateway.service -n 50 --no-pager
+
+# View live logs
+journalctl --user -u openclaw-gateway.service -f
+
+# Check if enabled on boot
+systemctl --user is-enabled openclaw-gateway.service
+# expected output: enabled
+```
+
+**IMPORTANT — after any gateway restart, always verify cron jobs:**
+```bash
+openclaw cron list
+```
+The gateway restart does not automatically recreate cron jobs if they were lost. Verify three jobs are present every time.
 
 ## Timezone & Locale
 
