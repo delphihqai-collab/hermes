@@ -218,6 +218,54 @@ No SSH needed. Paste the gateway token in dashboard Settings on first connect.
 - Machine name: hermes
 - Account: delphihq.ai@gmail.com
 
+## Updates
+
+### OpenClaw Auto-Updater
+- **Channel:** stable
+- **Auto-update:** enabled
+- **Delay:** 6 hours after new version detected
+- **Jitter:** applied within 12-hour window after delay
+- **Config:** `update.auto` in `~/.openclaw/openclaw.json`
+- **Behaviour:** silent — applies automatically, no notification. The weekly maintenance cron job provides the audit trail.
+
+### Weekly Maintenance Cron
+- **Name:** weekly-maintenance
+- **ID:** 0755ef79-a6dc-4f80-800f-fa0b31bf09b7
+- **Schedule:** Sundays at 03:00 Europe/Lisbon
+- **What it does:**
+  1. `openclaw update` — updates OpenClaw itself
+  2. `clawhub update --all` — updates all installed skills
+  3. `openclaw doctor` — health check and config migrations
+  4. Verifies three heartbeat cron jobs are still present
+  5. Posts summary to #hermes-logs
+- **Output channel:** #hermes-logs (1477061135269363974)
+
+### Manual Update (if needed between weekly runs)
+```bash
+# Preview
+openclaw update --dry-run
+# Apply
+openclaw update
+# Skills
+clawhub update --all
+# Health
+openclaw doctor
+```
+After any manual update: verify cron jobs with `openclaw cron list`
+
+### Update Channel
+Using: **stable** (never switch to beta without Boss approval)
+```bash
+# Check available versions
+npm view openclaw version
+# Rollback if an update breaks something
+npm install -g openclaw@<last-working-version>
+openclaw doctor
+systemctl --user restart openclaw-gateway.service
+```
+
+---
+
 ## Native Skills
 
 Skills live at `workspace/skills/` and are loaded automatically by OpenClaw. Changes take effect on the next session or after gateway restart.
