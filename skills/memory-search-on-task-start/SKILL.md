@@ -9,6 +9,18 @@ metadata: { "openclaw": { "emoji": "🧭" } }
 
 Run this at the beginning of any non-trivial task. Fast tasks (single tool call, simple answer) do not need this. Multi-step tasks, external actions, heartbeat routines, and anything touching the pipeline always need this.
 
+## Step 0 — Sub-Agent Check (Mandatory, No Exceptions)
+
+Before anything else: assess the task duration.
+
+Ask: "Will this require more than one or two tool calls, or take more than a few seconds?"
+
+If YES: spawn a sub-agent immediately. Post a one-line acknowledgement to the channel ("On it — running in background"). Do not begin execution in the main session. This is a hard stop, not a suggestion.
+
+If NO: proceed to Step 1.
+
+This step exists because AGENTS.md contains this rule and it is ignored when context is large or compacted. Step 0 forces the check every time, on every task, regardless of session state.
+
 ## Step 1 — Verify Registries Are in Context
 
 Check whether the Playbook Registry and Runbook Registry tables are visible in your current context (they live in AGENTS.md).
