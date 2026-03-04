@@ -28,4 +28,22 @@ Exactly what should the agent produce and in what format? If it requires Hermes 
 - If briefing a new agent type for the first time, read their SOUL.md before writing
 - Agents do not have context from previous sessions — always include relevant history in PART 1, even if it feels obvious
 
+## Timeout Rule (Non-Negotiable)
+
+**Set the timeout based on what the task actually needs. Never optimise for speed.**
+
+A timed-out sub-agent produces zero output — always worse than a slow one.
+
+| Task type | Minimum timeout |
+|---|---|
+| Simple file operations | 120s |
+| Multi-step writing (spec, report) | 300s |
+| Research (browse URLs + write) | 600s |
+| Complex build/audit | 900s |
+
+Rule of thumb: estimate how long you would take manually, double it, set that as `runTimeoutSeconds`.
+
+The cost of a timeout is always higher than the cost of extra time.
+
 **First extracted:** 2026-03-02
+**Last updated:** 2026-03-04 — added timeout rule

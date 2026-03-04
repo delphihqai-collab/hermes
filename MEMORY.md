@@ -132,8 +132,3 @@ Rule: any reusable template referenced by more than one agent lives here as a st
 ---
 *Specific interaction logs are moved to daily memory files to keep this file concise.*
 
-## Sub-Agent Timeout Rules
-- **Never set a short timeout to save time or cost.** A timed-out sub-agent produces zero output — worse than a slow one.
-- **Set timeout based on what the task actually needs.** Research tasks (browse multiple URLs + write report): minimum 8–10 minutes (480–600s). Simple file operations: 2–3 minutes. Complex multi-step builds: 15–20 minutes.
-- **The cost of a timeout is always higher than the cost of extra time.** Rerunning wastes more than running it right once.
-- **Rule of thumb:** estimate the task manually, double it, set that as the timeout.
