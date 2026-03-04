@@ -1,1 +1,14 @@
-{"lastHeartbeat":"2026-03-01T20:10:00Z","lastCommit":"deee5b5","notes":"Evening heartbeat. No active approvals pending. One stale Feb-28 approval (PDF extraction, already ✅'d by Boss, prior session). No pipeline or client activity. Workspace clean."}
+{
+  "lastHeartbeat": "2026-03-01T20:10:00Z",
+  "lastCommit": "deee5b5",
+  "notes": "Evening heartbeat. No active approvals pending. One stale Feb-28 approval (PDF extraction, already ✅'d by Boss, prior session). No pipeline or client activity. Workspace clean.",
+  "agents": {
+    "sdr": { "last_report": null, "status": "built_not_calibrated" },
+    "account-executive": { "last_report": null, "status": "built_not_calibrated" },
+    "account-manager": { "last_report": null, "status": "built_not_calibrated" },
+    "finance": { "last_report": null, "status": "built_not_calibrated" },
+    "legal": { "last_report": null, "status": "built_not_calibrated" },
+    "market-intelligence": { "last_report": null, "status": "built_not_calibrated" },
+    "knowledge-curator": { "last_report": null, "status": "built_not_calibrated" }
+  }
+}
