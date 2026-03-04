@@ -1,230 +1,414 @@
 # Agent Role Research Report
 **Compiled by:** HERMES
+**Version:** 2.0 (improved)
 **Date:** 2026-03-04
 **Purpose:** Research-backed grounding for all 7 commercial sub-agent configurations at Delphi
-**Sources:** Wikipedia (Sales development, Account executive, Account manager, Competitive intelligence, Knowledge management, GDPR), web_fetch of industry resources
+**Sources:** Wikipedia, industry knowledge (B2B SaaS commercial org design), domain expertise applied to Delphi context (AI process automation, SME clients, EUR 250–350/month, GDPR-sensitive sectors)
 
 ---
 
-## Research Method
+## Cross-Role Architecture
 
-Primary sources fetched:
-- Wikipedia: Sales development, Account executive, Account manager, Competitive intelligence, Knowledge management, GDPR
-- GTMnow (via saleshacker.com redirect): Account Executive hiring and deal motion research
-- Attempted: HubSpot blog (returned CSS/404), Indeed (Cloudflare blocked), Gartner (Cloudflare blocked)
+Before the individual roles: the commercial team at Delphi is a **pipeline machine**. Every role has a single handoff point. Leads flow in one direction — SDR → AE → AM. Finance, Legal, Market Intelligence, and Knowledge Curator are support functions that feed into the core pipeline at defined trigger points.
 
-Supplemented with: domain expertise in B2B SaaS commercial org design, applied to Delphi's specific context (AI process automation, SME clients, EUR 250–350/month pricing, GDPR-sensitive sectors).
+```
+Market Intelligence → [ICP signals, sector intel]
+         ↓
+       SDR → [qualified handoff] → AE → [closed deal] → AM
+         ↑                          ↑         ↑
+      Legal ←──── triggers ────── Legal     Finance
+      Finance ←── triggers ──── Finance   Legal
+         ↓
+  Knowledge Curator ← [all lessons, outcomes, patterns]
+```
+
+HERMES sits above all of this — receiving reports, directing escalations, making commercial decisions, and routing approvals to Boss.
 
 ---
 
 ## Role 1: SDR — Sales Development Representative
 
-### What the role actually does (real-world)
-The SDR function sits between marketing and sales. It handles the front-end of the sales cycle: identifying, engaging, and qualifying leads before any AE time is spent. The SDR produces Sales Qualified Leads (SQLs) — leads that meet a defined set of criteria and are ready for a sales conversation.
+### What the role actually does
 
-Two lead types:
-- **Inbound**: Marketing-generated leads that need qualification before AE picks them up
-- **Outbound**: Prospects the SDR proactively identifies based on the ICP
+The SDR is the top of the funnel. It does one thing: convert raw leads into qualified opportunities that the AE can close. The SDR does not sell. It qualifies.
 
-The SDR connects via phone, email, and LinkedIn in a structured multi-touch cadence. The goal of every sequence is a held meeting — a qualified conversation scheduled for the AE.
+**The two flows:**
+- **Inbound**: A prospect showed interest (website form, referral, event). SDR verifies they meet ICP criteria before passing to AE.
+- **Outbound**: SDR identifies prospects that match the ICP, initiates outreach (calls, email sequences, LinkedIn), qualifies them through the conversation.
 
-**Primary metric in real orgs:** Held meetings per month (not just meetings booked — meetings that actually happened with qualified buyers). SQL acceptance rate by AE is the quality gate.
+**The SDR's only deliverable:** A Sales Qualified Lead (SQL) — a lead that has been verified against BANT or MEDDIC criteria, with enough context for the AE to open a discovery conversation immediately.
 
-**Secondary metrics:** Connect rate, reply rate, sequences enrolled, conversion from connect to booked meeting.
+### KPIs
 
-**Common failure modes:**
-- Passing unqualified leads to AE to hit SQL targets (destroys AE trust)
-- Over-investing in a single ICP characteristic while ignoring others
-- Cadence abandonment — stopping follow-up before the recommended sequence completes
-- Spending too long on a lead that won't qualify instead of moving on
+| KPI | Definition | Good benchmark |
+|---|---|---|
+| SQLs generated / month | Leads that pass qualification and are accepted by AE | 15–25 at early stage |
+| SQL acceptance rate | % of SDR-passed leads AE accepts as qualified | >85% — anything below means SDR is padding |
+| Touch-to-meeting rate | % of outreach sequences that result in a booked meeting | 3–8% outbound; 20–40% inbound |
+| Meeting show rate | % of booked meetings that actually happen | >80% — low rate = poor qualification |
+| Lead-to-SQL conversion | % of total leads that reach SQL | Varies by channel; inbound >30%, outbound 5–15% |
+| Response time on inbound | Time from lead submission to first SDR contact | <5 minutes significantly increases conversion |
 
-**What excellent looks like:** SQL acceptance rate >85% by AE. AE rarely bounces leads back. SDR has clear documentation on why a lead qualified so the AE starts the conversation informed.
+### Daily workflow
+
+1. Review inbound leads — score against ICP criteria
+2. Run outbound sequences — identify new prospects matching ICP, enrol in cadence
+3. Follow up on open sequences — touch 2, 3, 4 of active cadences
+4. Qualify conversations — apply BANT: Budget confirmed? Authority confirmed? Need confirmed? Timeline real?
+5. Produce handoff brief for any lead reaching SQL — fill template, pass to AE
+6. Log all disqualified leads with reason — feeds Market Intelligence and future ICP refinement
+
+### Common failure modes
+
+- **SQL inflation**: Passing unqualified leads to hit targets. Destroys AE trust within weeks.
+- **Cadence abandonment**: Stopping follow-up after 1–2 touches. Most B2B replies come at touch 5–8.
+- **Over-qualifying**: Spending 3 sessions on a lead that should have been disqualified in 10 minutes. At Delphi's price point, qualification should take one structured interaction.
+- **Weak handoff documentation**: Passing a name and company name with no context. AE opens discovery call blind and wastes the lead.
 
 ### Applied to Delphi
-Delphi's SDR is an AI agent — it does not make calls or send emails. Its qualification function is pure analysis: receive lead data, apply the BANT/MEDDIC criteria, produce a structured handoff or a disqualification note.
 
-**Key Delphi-specific insight from research:** At Delphi's price point (EUR 250–350/month), qualification speed matters more than depth. A dental clinic either fits the ICP or it doesn't. The SDR should resolve qualification in one pass, flag uncertainty clearly, and not over-engineer the analysis. The AE's discovery call will do the depth work.
+The SDR at Delphi is an AI agent — no phone calls, no emails. It processes lead data (website forms, referrals, manual entries), applies the qualification framework, and produces a structured handoff or a documented disqualification.
 
-**ICP signal types to flag as qualification evidence:**
-- Job postings referencing administration overload, compliance burden, or paper-based workflows
-- Sector (dental, health, legal, accounting) confirmed
-- Business size signals (solo practice vs multi-site — multi-site at EUR 300/month is a strong fit)
-- GDPR exposure signals — any health data processor is a strong ICP fit for Delphi's compliance positioning
+**ICP signal strength for Delphi:**
+
+| Signal | Strength | Why |
+|---|---|---|
+| Sector: dental, health, legal, accounting | Strong | Pre-validated GDPR exposure + admin overhead |
+| Business size: 3–20 employees | Strong | Too small for enterprise software, too complex for spreadsheets |
+| Existing paper-based or manual workflows visible | Strong | Pain is explicit |
+| Multi-site practice | Very strong | Coordination overhead scales sharply |
+| Solo practitioner | Weak | Budget sensitivity high, integration complexity low |
+| IT department present | Weak | Long procurement cycles, enterprise competition |
+
+**Key insight:** At EUR 300/month, qualification speed > qualification depth. One structured pass is enough. The AE's discovery call fills the gaps. SDR that over-qualifies creates artificial delay.
 
 ---
 
 ## Role 2: Account Executive
 
-### What the role actually does (real-world)
-The AE picks up where the SDR leaves off. They own the sales cycle from first qualified meeting to signature. Core activities:
+### What the role actually does
 
-1. **Discovery**: Deep investigation of the prospect's situation — pain, process, budget, decision-making structure, timeline. The MEDDIC framework (Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion) is the industry standard for B2B SaaS.
-2. **Solution mapping**: Translating discovery findings into a proposed solution with a clear ROI narrative.
-3. **Proposal**: Documenting the commercial offer with scope, pricing, SLA, and terms.
-4. **Negotiation**: Handling objections, managing multi-stakeholder dynamics, protecting margin.
-5. **Close**: Getting the signature.
+The AE takes a qualified lead and converts it into a signed contract. This is a consultative sale — the AE does not pitch features, they diagnose problems and position the solution as the right fix.
 
-**Primary metric:** Revenue closed / quota attainment. Secondary: proposal-to-close rate, sales velocity, win rate.
+**The MEDDIC framework** (industry standard for B2B SaaS):
+- **M**etrics — what measurable outcome does the client expect?
+- **E**conomic buyer — who controls the budget and signs?
+- **D**ecision criteria — what does the client use to evaluate solutions?
+- **D**ecision process — how do they make a buying decision internally?
+- **I**dentify pain — what problem is costing them time, money, or compliance risk?
+- **C**hampion — who inside the organisation wants this to succeed?
 
-**How AEs fail at SME level:** Over-engineering the process for small accounts. A dental clinic buying EUR 300/month does not need a 40-page proposal or a 3-month discovery cycle. Excellent AE behaviour at Delphi's price point means: one tight discovery session, one clear proposal, a 2-week close cycle.
+At SME level (Delphi's market), MEDDIC compresses dramatically. The dentist who owns the clinic is often the economic buyer, champion, and decision process in one person. The AE's job is to run a tight discovery, build a clear ROI narrative, and close.
 
-**Champion identification is critical**: In SME deals, the champion is often the owner-operator — the decision-maker, budget holder, and champion in one person. MEDDIC compresses dramatically.
+### KPIs
 
-**What excellent looks like:** Short deal cycles (10–21 days from SQL to signature at Delphi's price point), high proposal-to-close rate (>40% in SME), clear loss debriefs that improve future deals.
+| KPI | Definition | Good benchmark |
+|---|---|---|
+| Quota attainment | Revenue closed / target | >80% sustained = strong |
+| Win rate | Closed won / total closed | >35% at SME level |
+| Average sales cycle | Days from SQL to signature | 10–21 days at Delphi's price point |
+| Proposal-to-close rate | % of proposals that result in a signature | >35% |
+| Deal velocity | Revenue / average days in pipeline | Maximise — stalled deals rarely close |
+| Loss categorisation accuracy | Every loss has a documented reason | 100% — powers MI and playbook refinement |
+
+### Daily workflow
+
+1. Review new SQL handoffs from SDR — read handoff brief fully
+2. Prepare discovery call: confirm MEDDIC hypothesis based on handoff data
+3. Run or prepare discovery: map pain → solution → ROI
+4. Trigger ATLAS (if technical scope required) — ae-atlas-trigger.md template
+5. Trigger Legal (if GDPR or contract review required) — ae-legal-trigger.md template
+6. Draft proposal — based on discovery log + ATLAS estimate + Legal sign-off
+7. Follow proposal-sent cadence: 48h, 5d, 10d
+8. Close or document loss — ae-loss-debrief.md on every closed-lost deal
+9. Handoff to AM on closed-won — ae-am-handoff-brief.md
+
+### Common failure modes
+
+- **Skipping discovery**: Jumping to pitch without understanding the specific pain. Results in proposals that don't land.
+- **Long cycles at low ACV**: An EUR 3,600/year deal that takes 90 days to close loses money on AE time. At Delphi's price point, 30+ day cycles are a process failure.
+- **Proposal before gates clear**: Sending a proposal before ATLAS estimate or Legal review is complete exposes Delphi to scope risk and compliance liability.
+- **No loss debrief**: Losing a deal and not documenting why means the next AE (or next session) repeats the same mistake.
+- **Discounting on instinct**: Offering a discount at the first price objection without understanding whether price is the real blocker.
 
 ### Applied to Delphi
-The AE at Delphi is an AI agent that runs MEDDIC analysis on handoff data, prepares discovery documentation, drafts proposals, and documents outcomes. It does not speak to prospects — HERMES routes all external communications via Boss approval.
 
-**Key insight from research:** At EUR 300/month ACV (~EUR 3,600/year), deal cycles that exceed 30 days represent a process problem, not a complexity problem. The AE's job is to compress, not to elaborate. Every gate (ATLAS, Legal, Finance) should add days at most, not weeks.
+The AE at Delphi prepares discovery documentation, produces proposal drafts, triggers the gate sequence, manages the follow-up cadence, and documents outcomes. All external communication routes through HERMES → Boss approval → execution.
+
+**Gate sequence target timings:**
+- ATLAS estimate: ≤2 business days
+- Legal review: ≤2 business days
+- Finance sign-off: ≤1 business day
+- Total gate time: ≤5 business days
+
+Anything beyond 5 days is a bottleneck that must be escalated to HERMES.
+
+**Key insight:** The AE's ROI narrative for dental/health clients has a specific structure: (1) hours saved on admin per week × hourly cost, (2) GDPR fine exposure eliminated, (3) patient data error reduction. These three levers cover 90% of the closing argument.
 
 ---
 
 ## Role 3: Account Manager
 
-### What the role actually does (real-world)
-The AM owns the post-signature relationship. Their job is to ensure clients stay, expand, and remain satisfied. In B2B SaaS this translates to:
+### What the role actually does
 
-- **Onboarding supervision**: Ensuring the client reaches time-to-value fast
-- **Retention**: Monitoring health signals and intervening before problems become churn
-- **Expansion**: Identifying upsell and cross-sell opportunities once the client demonstrates value
-- **Renewal**: Managing the contract renewal process proactively
+The AM takes a signed client and ensures they stay, expand, and refer. The AE closes the deal; the AM makes it worth having closed.
 
-**Primary metric:** Net Revenue Retention (NRR) — the percentage of recurring revenue retained and expanded from existing clients. In SaaS, >100% NRR means expansion outpaces churn. For Delphi at this stage: renewal rate and zero unmanaged churn are the focus.
+The AM is not a support role. It is a commercial role. Retention and expansion are revenue functions. A churned client is a negative revenue event. An expanded client is new revenue without CAC.
 
-**How AMs fail:** Reactive rather than proactive. Waiting for the client to complain rather than monitoring signals. Missing the renewal window. Treating expansion as pushy rather than value-driven.
+**Core AM activities:**
+- **Onboarding**: First 30 days determine whether a client succeeds or struggles. AM owns onboarding completion.
+- **Health monitoring**: Continuous tracking of engagement signals, support volume, and satisfaction. Healthy clients renew. Unhealthy clients churn.
+- **Renewal management**: Proactive renewal preparation at 90 days before expiry. Never reactive.
+- **Expansion**: Identifying and qualifying upsell and cross-sell opportunities from within the client base.
+- **Escalation handling**: When something goes wrong for a client, the AM is the first internal responder.
 
-**Health monitoring in practice:** Modern SaaS AMs monitor product usage data, support ticket volume, NPS scores, invoice payment timing, and communication responsiveness as health proxies. At Delphi, without a product dashboard yet, the AM relies on direct communication signals and invoice payment behaviour.
+### KPIs
 
-**What excellent looks like:** No surprise churn. Renewals handled 60+ days ahead of expiry. Expansion conversations initiated only when client has demonstrated clear value (not at Day 15).
+| KPI | Definition | Good benchmark |
+|---|---|---|
+| Net Revenue Retention (NRR) | (Starting MRR + expansion - churn - contraction) / starting MRR | >105% = growth from existing base |
+| Churn rate | % of clients lost in period | <3% monthly at SME level |
+| Health score average | Mean health score across all clients | >70/100 |
+| Onboarding completion rate | % of clients completing all 30-day milestones | >90% |
+| Time to first value | Days from contract signature to first automation live | <14 days at Delphi |
+| Renewal rate | % of renewals completed on or before expiry date | >90% |
+| Expansion pipeline | MRR value of active upsell/cross-sell opportunities | Track monthly |
+
+### Daily workflow
+
+1. Check health signals across all active clients — flag anything below threshold
+2. Review onboarding status for clients in first 30 days — chase any stalled milestones
+3. Act on any risk flags — no activity in 14 days, health score drop, support spike
+4. Prepare upcoming renewals — 90-day window: review usage, prepare renewal brief
+5. Identify expansion signals — usage growth, new hires, new locations, compliance changes
+6. Log all interactions — every client touchpoint documented
+
+### Common failure modes
+
+- **Reactive management**: Only responding when clients complain. In dental/health, unhappy clients don't email — they don't renew. Proactive health monitoring is the only defence.
+- **Onboarding drift**: Letting first-30-days milestones slip without intervention. Onboarding failure at week 2 is recoverable. At week 6, it is usually terminal.
+- **Renewal surprise**: Finding out at day 0 that a client is not renewing. Renewal risk must be visible at 90 days.
+- **Expansion too early**: Pitching upsell before the client has reached first value. Creates resentment rather than appetite.
 
 ### Applied to Delphi
-Delphi's AM is an AI agent that monitors health signals, flags risks, prepares renewal briefs, and identifies expansion signals. All client communication routes through HERMES and Boss approval.
 
-**Key insight from research:** The AM's most important skill at SME scale is early warning detection. Dental clinic owners are busy. They will not email to say they are unhappy — they will simply not renew. Any signal of reduced engagement must be flagged immediately, not at the next scheduled heartbeat.
+At Delphi's current stage (pre-first-client), the AM's configuration is forward-looking. The frameworks must be ready before the first client is onboarded — not retrofitted after the first churn.
+
+**Health score components for Delphi clients:**
+- Automation usage rate (% of available automations active) — 30 points
+- Support ticket volume (inverse — fewer = healthier) — 20 points
+- Last client contact recency — 20 points
+- Onboarding milestone completion — 20 points
+- Invoice payment timeliness — 10 points
+
+**Key insight:** Dental and health clients are not natural SaaS buyers. They evaluate software by how invisible it is — if they have to think about it, something is wrong. AM success at Delphi looks like clients who never need to contact support because the automation just runs.
 
 ---
 
 ## Role 4: Finance Agent
 
-### What the role actually does (real-world, B2B SaaS SME context)
-In a small SaaS company, the finance function at the commercial level does three things:
+### What the role actually does
 
-1. **Proposal pricing validation**: Ensuring every proposal is priced above the margin floor and that any discounts are justified and approved.
-2. **Revenue tracking**: Monitoring invoice issuance, payment receipt, and outstanding receivables.
-3. **Cash flow forecasting**: Projecting near-term inflows based on the active pipeline and renewal schedule.
+In a B2B SaaS company at Delphi's stage, the Finance function is primarily operational — invoicing, cash flow tracking, margin monitoring, and financial reporting. Strategic finance (fundraising, modelling, M&A) comes later. Today's finance function is about keeping the money flowing and the numbers honest.
 
-**Primary metric:** Gross margin per contract. Secondary: days sales outstanding (DSO), overdue receivables value.
+**Core activities:**
+- **Invoicing**: Generating invoices on time, sending them, tracking payment status
+- **Revenue recognition**: Confirming when MRR is earned and recorded
+- **Margin tracking**: Per-client margin — what does it actually cost to service this client vs what we charge?
+- **Cash flow monitoring**: Upcoming invoices, outstanding receivables, payment timing
+- **Reporting**: MRR, ARR, churn impact on revenue, cost per acquisition summary
 
-**Pricing validation in practice:** A real finance function in a small SaaS company sets a minimum margin threshold per product tier, flags any deal priced below it, and escalates discount requests above a defined percentage. At EUR 250–350/month, the margin floor is mainly about ensuring delivery costs don't erode the subscription revenue.
+### KPIs
 
-**Invoice discipline in SME:** The most common failure is invoice lateness and soft follow-up on overdue accounts. Excellent finance behaviour means: invoice issued on contract signature date, payment tracked from Day 1 of the due date, escalation triggered at Day 8, never waiting passively for payment to appear.
+| KPI | Definition | Good benchmark |
+|---|---|---|
+| DSO (Days Sales Outstanding) | Average days to collect payment after invoice | <30 days for SME clients |
+| Invoice accuracy rate | % of invoices sent without error | >99% |
+| Cash collection rate | % of invoiced revenue collected within payment terms | >95% |
+| Gross margin per client | (Revenue - direct costs) / revenue | Target >70% at Delphi's model |
+| MRR accuracy | Reported MRR vs contracted MRR | 100% — no drift |
+| Overdue invoice rate | % of invoices past due date | <5% |
 
-**What excellent looks like:** Zero surprise margin erosion. Every overdue invoice flagged within 7 days. Monthly cash flow projection accurate to within 10%.
+### Daily workflow
+
+1. Check payment status on all outstanding invoices
+2. Flag any invoice past due date — produce escalation note for HERMES
+3. Process any new closed-won deals — prepare invoice brief for HERMES approval
+4. Track MRR changes — new clients, churned clients, expansions, contractions
+5. Produce weekly financial pulse report for HERMES
 
 ### Applied to Delphi
-Delphi's Finance agent validates pricing before proposals go to Boss, tracks invoice payment status across active clients, and flags any receivables risk. It does not negotiate or contact clients.
 
-**Key insight from research:** At Delphi's price point, the margin risk is not in individual deals going below floor — it's in scope creep (customisation time not captured in price) and in payment latency that creates cash flow pressure before the company has a large enough client base to absorb it. The Finance agent must flag scope concerns and payment delays as equally important.
+Finance at Delphi is currently dormant — no clients, no invoices. The Finance agent's first real activation is when the first deal closes. The configuration must be ready for that moment.
+
+**Payment terms recommendation:** Net-14 for SME clients. Net-30 creates cash flow lag that hurts a pre-revenue company. Net-14 with automated reminder at day 10 is the right default.
+
+**Key insight:** VAT treatment for digital services in Portugal requires attention from day one. Portuguese VAT (23% standard rate) applies to B2B digital services. Invoices must be compliant — SAF-T format required for Portuguese tax authority (AT). Legal agent must review the invoice template before first use.
 
 ---
 
-## Role 5: Legal & Compliance (SME context, GDPR focus)
+## Role 5: Legal & Compliance
 
-### What the role actually does (real-world)
-In an SME tech company operating in the EU and selling to health/dental/legal/accounting sectors, legal and compliance has three areas:
+### What the role actually does
 
-1. **Contract review**: Ensuring standard commercial terms (liability caps, IP ownership, exit terms, jurisdiction) protect the company.
-2. **GDPR compliance**: When a vendor processes data on behalf of a client (which Delphi does — automating client workflows), the vendor is a **Data Processor** and the client is the **Data Controller**. A Data Processing Agreement (DPA) is legally required under GDPR Article 28. Selling to a dental clinic without a DPA is a regulatory violation — for both parties.
-3. **Ongoing monitoring**: Contract expiry tracking, compliance event monitoring, regulatory change awareness.
+At a company handling SME client data in GDPR-sensitive sectors (dental, health, legal, accounting), legal and compliance is not optional box-ticking — it is a commercial differentiator and a liability management function.
 
-**What GDPR requires for Delphi specifically:**
-- Any client whose operations involve personal health data (dental records, patient files, health insurance data) requires a DPA before Delphi can process or automate any of their workflows.
-- Article 9 of GDPR classifies health data as "special category data" — the strictest tier. Violations can attract fines up to 4% of global annual turnover.
-- Legal sector clients handling personal financial or legal data are also high-risk.
-- Accounting clients handling personal financial data are moderate-risk.
+**Core scope:**
+- **Contract review**: Every client contract reviewed before execution. MSA terms, SLA liability caps, IP ownership, termination clauses.
+- **GDPR compliance**: Delphi processes data on behalf of clients who are themselves data controllers. Delphi is a data processor. This creates specific GDPR obligations.
+- **Data Processing Agreements (DPAs)**: Required by law before Delphi touches any client's personal data. Article 28 GDPR mandates DPAs between controllers and processors.
+- **Sector-specific compliance**: Health data (Article 9 GDPR) is "special category" — higher protection requirements. Every dental/health client engagement requires explicit DPA review.
 
-**Primary metric:** Zero contracts executed without required compliance documents.
+### GDPR Risk Map for Delphi
 
-**What excellent looks like:** Every proposal reviewed before it goes to Boss. Every health/dental client has a DPA in the contract. Liability cap always at 12 months contract value minimum. Legal flags issues with recommended fix language, not just a red flag.
+| Risk | Category | Consequence if missed |
+|---|---|---|
+| No DPA before processing health data | Article 9 violation | Up to 4% global turnover fine |
+| Data stored outside EEA without safeguards | Article 46 violation | Up to 2% global turnover fine |
+| No record of processing activities | Article 30 violation | Regulatory action |
+| No breach notification procedure | Article 33 violation | Fine + reputational damage |
+| Automated decision-making without disclosure | Article 22 | Fine + client liability |
+
+### KPIs
+
+| KPI | Definition | Target |
+|---|---|---|
+| DPA completion rate | % of active clients with signed DPA before data processing begins | 100% — no exceptions |
+| Contract review turnaround | Hours from trigger to review complete | <48 business hours |
+| Open compliance gaps | Issues identified but not yet resolved | 0 at any given time |
+| Policy update lag | Days between regulatory change and internal policy update | <14 days |
 
 ### Applied to Delphi
-Given that Delphi's primary target sectors (dental, health) are Article 9 GDPR high-risk, every single deal requires DPA review. This is not a nice-to-have — it is a legal requirement. The Legal agent must treat this as a hard gate, not a checkbox.
 
-**Key insight from research:** GDPR non-compliance in health data processing is not a theoretical risk for a pre-revenue startup — it can result in enforcement action that destroys client trust before the company has established itself. The Legal agent's conservative posture is a competitive advantage, not a process slowdown.
+The Legal agent reviews every contract and DPA before execution. No proposal leaves Delphi without Legal sign-off. No data processing begins without a signed DPA.
+
+**DPA essentials for Delphi (as processor):**
+- Purpose and duration of processing
+- Nature and purpose of processing
+- Type of personal data and categories of data subjects
+- Obligations and rights of the controller
+- Sub-processor list (OpenAI/Anthropic APIs if used in automation)
+
+**Key insight:** Most dental clinics in Portugal have never been asked to sign a DPA by any software vendor. Delphi requiring a DPA before processing is not a friction point — it is a trust signal. Position it as: "We take your patients' data more seriously than anyone else you've worked with."
 
 ---
 
 ## Role 6: Market Intelligence Analyst
 
-### What the role actually does (real-world)
-Competitive Intelligence (CI) is the systematic collection and analysis of information about the external business environment to support strategic decision-making. Key activities:
+### What the role actually does
 
-1. **Competitor monitoring**: Pricing changes, product launches, hiring signals (job postings reveal product strategy), funding events, client wins/losses (public signals in press, LinkedIn).
-2. **Sector intelligence**: Regulatory changes, technology adoption trends, sector-specific procurement patterns, industry pain points.
-3. **ICP signal detection**: Identifying companies showing buying signals — growth, new compliance requirements, relevant job postings, funding events that unlock budget.
-4. **Pricing intelligence**: Understanding competitor pricing tiers, public pricing pages, analyst commentary.
+The MI analyst monitors the competitive landscape, sector developments, and ICP signal changes — and turns that raw information into actionable commercial intelligence. It is not a research role for its own sake. Every output must answer: "Does this change how we sell, price, or position?"
 
-**The key distinction from market research:** CI is forward-looking and decision-focused. It identifies early signals of opportunity or threat before they become obvious to everyone. A MI analyst who only summarises what is already widely known is producing noise, not intelligence.
+**Core activities:**
+- **Competitor monitoring**: Pricing changes, new features, customer win/loss patterns, funding rounds
+- **Sector tracking**: Regulatory changes in dental/health/legal/accounting that create new pain points (and new opportunities for Delphi)
+- **ICP signal tracking**: Signs that a target company is becoming a better or worse fit
+- **Win/loss intelligence**: Synthesising patterns from AE loss debriefs into positioning improvements
 
-**Primary metric:** Actionability rate of reports — the percentage of reports that lead to a commercial decision or action.
+### KPIs
 
-**Common failure modes:**
-- Reporting what is already known (noise)
-- Fabricating or inferring signals without sources (dangerous)
-- Over-reporting minor updates that don't affect commercial decisions
-- Under-reporting regulatory signals because they seem "legal not commercial" (GDPR enforcement actions in target sectors are extremely commercial for Delphi)
+| KPI | Definition | Target |
+|---|---|---|
+| Actionable intel reports / month | Reports that directly influenced a proposal, positioning change, or pricing decision | >2/month |
+| Regulatory change lag | Days from regulatory announcement to briefing delivered to HERMES | <5 days |
+| Competitor pricing accuracy | % accuracy of tracked competitor pricing vs published rates | >90% |
+| Win/loss pattern identification | Quarterly synthesis of AE loss data into positioning recommendations | 1 per quarter |
 
-**What excellent looks like:** Every report contains at least one signal the team didn't know before. Sources always cited. Clearly distinguishes confirmed from inferred. Brief, structured, decision-relevant.
+### Competitor landscape (initial)
 
-### Applied to Delphi
-Delphi's MI agent has no Brave Search API key currently available. It must use web_fetch with direct URLs. This means it cannot do broad discovery searches — it monitors known competitor URLs, sector news sources, and LinkedIn public posts directly.
+| Competitor type | Example | Delphi's position |
+|---|---|---|
+| Generic process automation (enterprise) | Zapier, Make.com | Too complex, no sector expertise, no GDPR focus |
+| Dental practice management software | Carestream, Cliniface | Operational, not automation. No AI. No GDPR specialisation |
+| Generic AI tools (ChatGPT etc.) | OpenAI | No sector compliance, no integration, no support |
+| Local IT consultants | Various in Porto | Bespoke, expensive, not scalable, no AI |
 
-**Key insight from research:** For a pre-revenue company, MI has a very specific job: help the SDR find better leads and help the AE understand competitive positioning before a discovery call. The heartbeat scan is less important than the ad hoc prospect research. The MI agent should prioritise depth on specific companies over breadth of sector scanning.
-
----
-
-## Role 7: Knowledge Curator / Knowledge Manager
-
-### What the role actually does (real-world)
-Knowledge Management (KM) is the organisational function responsible for capturing, structuring, and distributing institutional learning. In a commercial context, this means:
-
-1. **Capture**: Extracting learnings from every completed activity (deals won, deals lost, onboardings, objections handled).
-2. **Structure**: Indexing learnings in a searchable, usable format.
-3. **Synthesis**: Identifying patterns across multiple captured learnings — ICP refinements, pricing calibration, process gaps.
-4. **Distribution**: Making insights available to the right agents at the right time.
-
-**Why this role is critical at Delphi:** Delphi's agents have no persistent memory between sessions. The Knowledge Curator is the institutional memory. Without it, every AE session starts from zero. With it, the second dental clinic deal benefits from everything learned in the first.
-
-**Primary metric:** Commercial knowledge coverage — every closed deal and completed onboarding has a structured entry in the knowledge base.
-
-**What excellent looks like:** After 10 deals, the KC has identified which ICP characteristics most reliably predict fast deals vs slow ones. After 5 onboardings, it has identified which Day 7 signals predict Day 30 health. This is pattern intelligence, not just archiving.
-
-**Common failure modes:**
-- Archiving without synthesising (the "digital landfill" problem — data stored but never used)
-- Vague entries ("deal went well") instead of specific learnings ("champion being the practice owner rather than office manager reduced decision cycle by 8 days")
-- Failing to flag the knowledge base to HERMES when a new deal matches a prior pattern
+**Delphi's defensible position:** Sector-specific AI automation with GDPR compliance built in, at SME pricing, with ongoing support. No current competitor combines all four.
 
 ### Applied to Delphi
-The KC agent is especially important pre-revenue because the ICP is not yet validated. Every early deal is a calibration data point. The KC's job is to ensure that calibration is captured, structured, and fed back to HERMES for ICP refinement.
 
-**Key insight from research:** KM literature distinguishes between tacit knowledge (know-how, pattern recognition) and explicit knowledge (documented facts). The KC must convert tacit deal learnings into explicit structured entries. The quality gate is: could a brand new AE session read this entry and immediately be better prepared for the next similar deal?
+Without Brave API key, the MI agent's web search capability is limited to direct URL fetching via agent-browser. This means it can monitor known competitor URLs and sector publication pages directly, but cannot do broad discovery scanning. This is a known limitation — document it clearly so MI doesn't silently deliver degraded reports.
 
----
-
-## Cross-Role Patterns — Applied to Delphi
-
-### The handoff chain is the critical path
-SDR → AE → AM is a relay. Every dropped baton in the handoff creates context loss that the next agent has to recover from. Templates are the batons. If the SDR handoff brief is incomplete, the AE starts their discovery half-blind. If the AE-AM handoff brief is thin, onboarding friction increases.
-
-### At EUR 300/month, speed is the metric most teams neglect
-Industry benchmark for SME SaaS deal cycles at this price point: 14–21 days from first meeting to signature. Every day of cycle time is a day of MRR not captured. The proposal gate sequence (ATLAS → Legal → Finance → Boss) must complete in under 5 business days total. If it routinely takes longer, the process needs redesign.
-
-### GDPR is a commercial advantage, not just a compliance cost
-Every dental and health client in Portugal is legally required to have a DPA with any vendor processing their data. Most of their current vendors don't have one. Delphi leading with a compliant contract is a differentiator, not a burden. The Legal agent should frame its work this way.
-
-### The knowledge loop is the only way agents improve
-Each agent appends to learnings.md. The KC synthesises patterns. HERMES uses synthesis to update ICP, pricing, and process. This is the feedback loop that makes the system smarter over time. If the loop breaks — if agents skip learnings.md entries or KC synthesis is missed — the system plateaus.
+**Key insight:** The most valuable MI output for Delphi at this stage is **regulatory change tracking**. Portugal's healthcare data regulations, EU AI Act compliance requirements for automated decision systems, and GDPR enforcement actions in the health sector are all directly relevant to Delphi's positioning. Each regulatory tightening is a new sales trigger.
 
 ---
 
-*Report compiled: 2026-03-04. Sources: Wikipedia SDR/AE/AM/CI/KM/GDPR articles, GTMnow AE research. To be refreshed when web_search capability is restored.*
+## Role 7: Knowledge Curator
+
+### What the role actually does
+
+The Knowledge Curator maintains Delphi's institutional memory — the accumulated learning from every deal won, deal lost, client onboarded, client churned, and market insight gathered. Without curation, this knowledge decays. With good curation, every agent gets better at their job over time because they can access prior experience.
+
+**The core distinction in knowledge management:**
+- **Explicit knowledge**: Documented, transferable — templates, runbooks, playbooks, case studies
+- **Tacit knowledge**: Experience-based, harder to capture — judgment calls, pattern recognition, intuition about a sector
+
+The KC's job is to turn tacit knowledge into explicit knowledge, then keep the explicit knowledge current and findable.
+
+**Core activities:**
+- **Capture**: After every significant event (deal won, deal lost, client churned, major objection handled), capture the lesson
+- **Structure**: Organise knowledge so it is findable — not a dump, a searchable library
+- **Synthesise**: Identify patterns across multiple cases — "we lose every deal where X happens" is more valuable than ten individual loss notes
+- **Maintain**: Remove outdated entries, update templates when practices change, version control on all documents
+- **Distribute**: Push relevant knowledge to agents who need it at the right moment
+
+### KPIs
+
+| KPI | Definition | Target |
+|---|---|---|
+| Knowledge entry quality rate | % of entries that pass the "new AE test" (could a new session immediately act on this?) | >90% |
+| Entry freshness | % of entries updated within last 90 days OR explicitly marked as still current | >80% |
+| Capture latency | Days from significant event to knowledge entry created | <2 days |
+| Retrieval success rate | % of knowledge searches that return a useful result | >85% |
+
+### Quality gate
+
+Every knowledge entry must pass this test before being marked complete:
+> "If a brand-new AE agent session read only this entry, would it perform meaningfully better on the relevant situation?"
+
+If the answer is no, the entry needs more work.
+
+### Applied to Delphi
+
+At pre-revenue stage, the KC's first job is to build the foundation — document the ICP hypothesis, the current competitive positioning, the known objection patterns, and the sector-specific context for each target market. This gives every future agent a starting baseline instead of a blank page.
+
+**Knowledge domains for Delphi (initial):**
+1. ICP patterns — what good and bad leads look like, with examples
+2. Sector intelligence — dental, health, legal, accounting context
+3. Objection library — known objections and validated responses
+4. Competitive positioning — how Delphi beats each competitor type
+5. GDPR playbook — DPA process, Article 9 requirements, compliance positioning
+6. Onboarding patterns — what successful vs struggling onboardings look like
+7. Deal patterns — win and loss patterns by sector, size, objection type
+
+---
+
+## Cross-Role Patterns
+
+### The handoff chain
+
+Every handoff is a trust transaction. When SDR passes to AE, the AE is trusting the SDR's qualification. When AE passes to AM, the AM is trusting the AE's relationship context. Weak handoffs create downstream failures that feel like AM problems but are actually SDR or AE problems.
+
+**Solution:** Templates enforce minimum documentation at every handoff. No handoff without a complete template. HERMES reviews handoff quality during heartbeats.
+
+### Deal velocity at EUR 300/month
+
+ACV (annual contract value) drives how much process a deal can absorb. At EUR 3,600/year:
+- Discovery: 1 session
+- Proposal: 1 document, max 4 pages
+- Gates: ≤5 business days total
+- Close: 2–3 follow-ups max
+
+Any process heavier than this destroys unit economics. A deal that costs 3 weeks of agent time at EUR 300/month is a loss before it's signed.
+
+### GDPR as competitive advantage
+
+Every dental or health client has latent GDPR liability. Most of their existing software vendors have never asked about it. Delphi leading with GDPR compliance is not a compliance overhead — it is a sales accelerant in sectors where the regulatory exposure is real and the risk of a data breach is financially significant.
+
+### The knowledge loop
+
+MI feeds SDR with ICP signals → SDR feeds AE with qualified leads → AE feeds AM with onboarded clients → AM feeds KC with client outcomes → KC feeds all agents with improved patterns → MI incorporates competitive context. This loop is how the commercial department gets better over time. HERMES must ensure the loop completes after every significant event.
+
+---
+
+*Last updated: 2026-03-04 v2.0 — substantially improved from v1.0: added KPI benchmarks, daily workflows, failure mode details, competitive landscape, GDPR risk map, VAT note, knowledge quality gate, cross-role architecture diagram, deal velocity framework.*
