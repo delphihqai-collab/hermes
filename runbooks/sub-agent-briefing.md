@@ -30,20 +30,21 @@ Exactly what should the agent produce and in what format? If it requires Hermes 
 
 ## Timeout Rule (Non-Negotiable)
 
-**Set the timeout based on what the task actually needs. Never optimise for speed.**
+**Default: omit `runTimeoutSeconds` entirely.** Sub-agents run until done.
 
-A timed-out sub-agent produces zero output — always worse than a slow one.
+`runTimeoutSeconds` is a safety net for genuinely runaway tasks — not a productivity tool. Setting it arbitrarily creates a new failure mode (timeout before completion) without solving any real problem.
 
-| Task type | Minimum timeout |
-|---|---|
-| Simple file operations | 120s |
-| Multi-step writing (spec, report) | 300s |
-| Research (browse URLs + write) | 600s |
-| Complex build/audit | 900s |
+**Only set a timeout when:**
+- The task depends on an external API that might never respond
+- The task could enter an infinite loop (e.g. retrying a failing operation)
+- The scope is genuinely unbounded and you need a hard stop
 
-Rule of thumb: estimate how long you would take manually, double it, set that as `runTimeoutSeconds`.
+**Never set a timeout to:**
+- Save cost
+- Save time
+- Seem conservative
 
-The cost of a timeout is always higher than the cost of extra time.
+If a sub-agent is taking long, that means the task is hard. Let it finish.
 
 **First extracted:** 2026-03-02
 **Last updated:** 2026-03-04 — added timeout rule
