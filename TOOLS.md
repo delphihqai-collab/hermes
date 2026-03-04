@@ -242,15 +242,19 @@ No SSH needed. Paste the gateway token in dashboard Settings on first connect.
 
 ### Manual Update (if needed between weekly runs)
 ```bash
-# Preview
-openclaw update --dry-run
-# Apply
-openclaw update
+# Update OpenClaw (npm install — correct method for this machine)
+~/.nvm/versions/node/v22.22.0/bin/npm install -g openclaw@latest --prefix ~/.nvm/versions/node/v22.22.0
+
 # Skills
 clawhub update --all
 # Health
 openclaw doctor
+# Restart gateway after update
+systemctl --user restart openclaw-gateway.service
 ```
+
+> ⚠️ Do NOT use `openclaw update` or system `npm install -g` — both fail on this machine.
+> `openclaw update` skips npm installs (git-only). System npm hits EACCES on /usr/lib/node_modules.
 After any manual update: verify cron jobs with `openclaw cron list`
 
 ### Update Channel
