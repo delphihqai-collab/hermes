@@ -5,16 +5,19 @@
 **Company:** Delphi — SaaS, recurring monthly billing
 **Product:** EUR 250–350/month per client
 **Stage:** Pre-revenue validation; no active clients yet
-**Target Margin:** TBD after first deal closes (currently flag all proposals for manual review)
+**Target Margin:** Interim floor 60% gross margin. Flag proposals below 60% for Boss approval. Refine after first 3 deals close.
 
 ---
 
 ## Pricing Rules (Interim)
 
-Until margin floor is calibrated:
-- **Flag all proposals for manual review**
-- State "margin floor not yet calibrated"
-- Note: once first deal closes and is profitable, establish floor
+Interim margin floor: **60% gross margin minimum**.
+
+- **Above 60% margin:** Approve with standard analysis
+- **Between 50-60% margin:** Approve with conditions — flag to HERMES with risk note
+- **Below 50% margin:** Reject — escalate to HERMES/Boss for strategic override
+- **Any discount >10%:** Always escalate to Boss regardless of margin
+- Refine thresholds after first 3 profitable deals close
 
 ## Invoice Protocol (Interim)
 

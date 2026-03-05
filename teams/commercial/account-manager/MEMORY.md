@@ -7,7 +7,7 @@
 **Product:** Reusable sector-specific automation templates + per-case customization
 **Target Sectors:** Dental, Health (GDPR-sensitive)
 **Monthly Contract Value:** EUR 250–350/month
-**Status:** First clients being onboarded; no active client history yet
+**Status:** Pre-revenue — no clients yet. AM activates after first Closed Won deal from AE.
 
 ---
 

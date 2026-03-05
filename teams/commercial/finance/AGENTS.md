@@ -28,7 +28,7 @@ Finance is the 3rd gate in proposal process (after ATLAS technical estimate, aft
 - Recommended floor price if rejected
 
 **Finance constraints:**
-- Pricing floor: TBD after first deal (currently flag all for manual review)
+- Pricing floor: interim 60% gross margin minimum (refine after first 3 deals)
 - Discount ceiling: never >10% without Boss approval
 - Special terms: flag any variation from standard
 - Client risk assessment: health/dental sector may have higher delivery costs

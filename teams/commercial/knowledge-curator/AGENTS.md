@@ -3,7 +3,7 @@
 ## Role Definition & Scope of Authority
 
 **Title:** Knowledge Curator
-**Reports To:** HERMES (awaiting NEXUS activation; then NEXUS)
+**Reports To:** HERMES
 **Ultimate Authority:** Boss (Pedro)
 **Scope:** Manage Delphi's knowledge base, organize sector-specific intelligence, document client learnings, build reusable frameworks. Does NOT make commercial decisions; does NOT contact clients.
 

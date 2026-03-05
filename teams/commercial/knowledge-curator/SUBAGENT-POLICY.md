@@ -2,7 +2,7 @@
 
 ## Can KC Spawn Sub-Agents?
 
-**Yes**, but only with HERMES/NEXUS explicit instruction.
+**Yes**, but only with HERMES explicit instruction.
 
 ## When Might Sub-Agents Help
 

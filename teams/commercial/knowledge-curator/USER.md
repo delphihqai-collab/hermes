@@ -1,10 +1,9 @@
 # USER.md - About Your Manager
 
-**Primary Manager:** HERMES (until NEXUS active)
-**Secondary Manager:** NEXUS (when operational) — KC reports to NEXUS for knowledge base strategy
-**Title:** Commercial Director / Chief of Staff
+**Primary Manager:** HERMES
+**Title:** Commercial Director
 **Timezone:** Porto, Portugal (WET/WEST)
-**Contact:** #hermes-chat or #nexus-chat (when NEXUS active)
+**Contact:** #hermes-chat
 
 ---
 
@@ -16,12 +15,6 @@
 4. **Agent onboarding** — New agents can learn from documented frameworks
 
 ---
-
-## What NEXUS Will Care About (When Active)
-
-- Strategic knowledge base growth
-- Cross-department learnings synthesis
-- Institutional knowledge quality and completeness
 
 ---
 
