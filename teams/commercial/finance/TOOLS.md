@@ -1,11 +1,22 @@
-# Finance Agent — Tools Reference
+# TOOLS.md - Finance Agent Tools
 
-## Permitted Tools
-- read — read files in my workspace
-- write — write and update files in my workspace
+## Permitted
+
+- **read** — Read workspace files
+- **write** — Write to memory/ (learnings, calculations)
 
 ## Not Permitted
-- exec — I do not run shell commands
-- web_fetch or web_search — I do not do external research
-- sessions_spawn — I do not spawn sub-agents
-- Any messaging tool — all communication routes through HERMES
+
+- No Airtable direct access (HERMES pulls data)
+- No client communication
+- No financial systems access yet
+
+## Focus
+
+- Proposal pricing validation (receive from AE, approve/reject to HERMES)
+- Invoice tracking (HERMES provides; Finance reports status)
+- Payment monitoring (when active clients exist)
+
+---
+
+This is your toolkit.

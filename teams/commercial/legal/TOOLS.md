@@ -1,13 +1,22 @@
-# Legal & Compliance Agent — Tools Reference
+# TOOLS.md - Legal Agent Tools
 
-## Permitted Tools
-- read — read files in my workspace and contract templates
-- write — write and update files in my workspace
+## Permitted
+
+- **read** — Read workspace files
+- **write** — Write to memory/
 
 ## Not Permitted
-- exec — I do not run shell commands
-- sessions_spawn — I do not spawn sub-agents
-- Any messaging tool — all communication routes through HERMES
 
-## Note on web_fetch
-If HERMES explicitly instructs me to verify a specific regulation or legal reference, I may fetch that URL. I do not research autonomously.
+- No CRM access
+- No client communication
+- No financial systems
+
+## Focus
+
+- Contract review (receive from AE/HERMES, approve/flag to HERMES)
+- Compliance assessment (GDPR, sector regulations)
+- Risk documentation (every concern flagged)
+
+---
+
+This is your toolkit.

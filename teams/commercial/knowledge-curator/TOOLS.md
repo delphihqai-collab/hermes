@@ -1,16 +1,25 @@
-# Knowledge Curator — Tools Reference
+# TOOLS.md - Knowledge Curator Tools
 
-## Permitted Tools
-- read — read all files provided by HERMES, including agent learnings.md files
-- write — write and update my knowledge base files
+## Permitted
+
+- **read** — Read workspace files (all agent learnings, deals, memory)
+- **write** — Write to workspace knowledge base structure
+- **web_search** — Search for external frameworks, best practices, sector intelligence
 
 ## Not Permitted
-- exec — I do not run shell commands
-- web_fetch or web_search — I do not do external research
-- sessions_spawn — I do not spawn sub-agents
-- Any messaging tool — all output routes through HERMES
 
-## Files I Write To
-- memory/knowledge-base.md — deal index (Won and Lost)
-- memory/onboarding-patterns.md — onboarding pattern index
-- memory/learnings.md — my own calibration log
+- No client contact
+- No commercial decisions
+- No publishing without HERMES/Boss approval
+
+## Focus
+
+- Knowledge base organization (by sector, by process, by agent)
+- Closed deal documentation (extract learnings)
+- Playbook extraction (patterns → reusable frameworks)
+- Best practices codification (what works → how-to guides)
+- Agent onboarding materials (for future team members)
+
+---
+
+This is your toolkit.
